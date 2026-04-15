@@ -15,8 +15,8 @@ Both slider outputs are analog, so they are read through the `MCP3008` ADC inste
 
 | Slider | Breadboard output note | Final destination | Power note | Ground note | Verification |
 | --- | --- | --- | --- | --- | --- |
-| Horizontal slider | breadboard `g41` | `MCP3008 CH1` | `VCC -> 3.3V positive rail`, lab note near row `5` | `GND -> 3.3V negative rail`, lab note near row `41` | moving the horizontal slider changes `CH1` |
-| Vertical slider | breadboard `g39` | `MCP3008 CH3` | `VCC -> 3.3V positive rail`, lab note near row `4` | `GND -> 3.3V negative rail`, lab note near row `46` | moving the vertical slider changes `CH3` |
+| Horizontal slider | breadboard `g41` | `MCP3008 CH1` | `VCC -> 3.3V positive rail`, corrected lab note near row `7` | `GND -> 3.3V negative rail`, corrected lab note near row `43` | moving the horizontal slider changes `CH1` |
+| Vertical slider | breadboard `g39` | `MCP3008 CH3` | `VCC -> 3.3V positive rail`, corrected lab note near row `6` | `GND -> 3.3V negative rail`, corrected lab note near row `48` | moving the vertical slider changes `CH3` |
 
 ## Working Principle
 
@@ -52,4 +52,4 @@ The slider mapping was verified through ADC testing and runtime behavior.
 
 - Dense breadboard wiring made the exact jumper path difficult to capture clearly in photographs.
 - For that reason, the final slider mapping was confirmed through breadboard notes plus runtime ADC validation.
-- If a fully pin-accurate hardware redraw is required later, the exact 3.3V and GND rail source pins on the Raspberry Pi should be rechecked.
+- The slider rail row notes were corrected after a later lab re-check. Earlier power and ground row notes were off by `+2` and should not be reused.

@@ -38,5 +38,6 @@ This folder is a GitHub-ready handover package for the Raspberry Pi to Unity int
 
 - Detailed joystick wiring and explanation: `docs/joystick-wiring.md`
 - Detailed slider wiring notes: `docs/slider-wiring.md`
+- Detailed encoder wiring notes: `docs/encoder-wiring.md`
 
 See `docs/script-purposes.md` for detailed explanations.

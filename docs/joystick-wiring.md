@@ -22,8 +22,8 @@ In this project:
 | `SW` | not fully recorded on breadboard | Raspberry Pi physical pin `37` (`BCM26`) | joystick press button | pressing the joystick prints `JOYBTN` |
 | `VRx` | breadboard `g37` | `MCP3008 CH5` | left and right movement | moving left or right changes `CH5` |
 | `VRy` | breadboard `g36` | `MCP3008 CH6` | up and down movement | moving up or down changes `CH6` |
-| `GND` | ground rail | Raspberry Pi `GND`; lab note recorded as rail connected near physical pin `18` | ground reference | required for stable reading |
-| `VCC` | positive rail | Raspberry Pi `3.3V`; exact physical power pin should be rechecked before final hardware redraw | joystick power | required for stable reading |
+| `GND` | ground rail, corrected lab note near row `20` | Raspberry Pi `GND` | ground reference | required for stable reading |
+| `VCC` | positive rail, corrected lab note near row `17` | Raspberry Pi `3.3V` | joystick power | required for stable reading |
 
 ## Working Principle
 
@@ -86,4 +86,4 @@ This confirms:
 
 - Dense breadboard wiring made it difficult to visually trace every jumper wire in photographs.
 - For that reason, final joystick mapping was verified primarily through runtime testing and ADC or GPIO diagnostics.
-- The exact physical `3.3V` power pin on the Raspberry Pi should be double-checked if a final pin-accurate hardware drawing is required.
+- The joystick rail row notes were corrected after re-checking in the lab. Earlier notes were offset and should not be used.
