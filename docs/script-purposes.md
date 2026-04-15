@@ -58,3 +58,7 @@
 - Confirm Unity is listening on port `5005`.
 - Confirm the scene contains `PiSystemBridge`.
 - Confirm the Raspberry Pi and Unity PC are on the same network.
+
+## Detailed Wiring Notes
+
+- `joystick-wiring.md`: detailed joystick pin, breadboard, ADC, and GPIO notes

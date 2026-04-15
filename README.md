@@ -34,4 +34,8 @@ This folder is a GitHub-ready handover package for the Raspberry Pi to Unity int
 - Unity listener port: `5005`
 - Confirmed main script: `pi_input_sender.py`
 
+## Key Hardware Notes
+
+- Detailed joystick wiring and explanation: `docs/joystick-wiring.md`
+
 See `docs/script-purposes.md` for detailed explanations.
