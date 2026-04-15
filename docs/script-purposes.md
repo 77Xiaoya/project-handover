@@ -62,3 +62,4 @@
 ## Detailed Wiring Notes
 
 - `joystick-wiring.md`: detailed joystick pin, breadboard, ADC, and GPIO notes
+- `slider-wiring.md`: detailed horizontal and vertical slider wiring notes
