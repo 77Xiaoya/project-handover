@@ -790,8 +790,13 @@ Recommended setup procedure:
 7. Update `UNITY_IP` and `UNITY_PORT` if necessary.
 8. Ensure SPI is enabled on the Raspberry Pi by running `sudo raspi-config`, then go to `Interface Options -> SPI -> Enable`.
 9. Reboot the Raspberry Pi if SPI was just enabled.
-10. Reconnect through SSH and run `python3 pi_input_sender.py`.
-11. Watch for outgoing message activity in the Raspberry Pi terminal.
+10. Reconnect through SSH and verify SPI device availability with `ls /dev/spidev*`.
+11. If needed, check whether SPI kernel modules are loaded by running `lsmod | grep spi`.
+12. If no SPI device appears, manually load the modules using `sudo modprobe spi_bcm2835` and `sudo modprobe spidev`, then check again with `ls /dev/spidev*`.
+13. If SPI is still unavailable, open `sudo nano /boot/config.txt` and confirm that `dtparam=spi=on` exists. Add the line if it is missing.
+14. Reboot again if `config.txt` was changed.
+15. Reconnect through SSH and run `python3 pi_input_sender.py`.
+16. Watch for outgoing message activity in the remote Raspberry Pi shell.
 
 The commands are entered in a Windows PowerShell window, but after SSH login they are executed remotely in the Raspberry Pi environment. Google Colab is not used in this project.
 
@@ -804,12 +809,39 @@ The commands are entered in a Windows PowerShell window, but after SSH login the
 5. 登录后输入 `dir`，确认 `pi_input_sender.py` 存在。
 6. 如有需要，使用 `nano pi_input_sender.py` 修改脚本。
 7. 根据需要更新 `UNITY_IP` 和 `UNITY_PORT`。
-8. 通过 `sudo raspi-config` 确认树莓派已启用 SPI，然后进入 `Interface Options -> SPI -> Enable`。
+8. 通过 `sudo raspi-config` 启用 SPI，然后进入 `Interface Options -> SPI -> Enable`。
 9. 如果刚启用 SPI，则重启树莓派。
-10. 重新通过 SSH 登录后，输入 `python3 pi_input_sender.py` 运行脚本。
-11. 在树莓派终端观察是否有消息持续输出。
+10. 重新通过 SSH 登录后，使用 `ls /dev/spidev*` 检查 SPI 设备是否存在。
+11. 如有需要，使用 `lsmod | grep spi` 检查 SPI 内核模块是否已加载。
+12. 如果没有看到 SPI 设备，可执行 `sudo modprobe spi_bcm2835` 和 `sudo modprobe spidev`，然后再次输入 `ls /dev/spidev*` 检查。
+13. 如果 SPI 仍不可用，则打开 `sudo nano /boot/config.txt`，确认其中存在 `dtparam=spi=on`；若不存在则手动添加。
+14. 如果修改了 `config.txt`，则再次重启树莓派。
+15. 重新通过 SSH 登录后，输入 `python3 pi_input_sender.py` 运行脚本。
+16. 在远程树莓派 Shell 中观察是否有持续输出的消息。
 
 命令是在 Windows PowerShell 窗口中输入的，但在 SSH 登录后，它们实际上是在树莓派的远程环境中执行的。本项目不使用 Google Colab。
+
+#### 8.2.1 Why SPI Must Be Enabled / 8.2.1 为什么必须启用 SPI
+
+**English**  
+SPI must be enabled because the joystick analog axes and the two sliders are read through the MCP3008 ADC. Without SPI, the Raspberry Pi cannot communicate with MCP3008, which means analog channels such as `CH1`, `CH3`, `CH5`, and `CH6` cannot be read correctly.
+
+**中文**  
+必须启用 SPI 的原因是：摇杆模拟轴和两个滑杆都需要通过 MCP3008 ADC 读取。如果没有启用 SPI，树莓派就无法与 MCP3008 通信，也就无法正确读取 `CH1`、`CH3`、`CH5` 和 `CH6` 这些模拟通道。
+
+#### 8.2.2 SPI Verification / 8.2.2 SPI 验证方法
+
+**English**  
+SPI can be considered available when:
+- a device such as `/dev/spidev0.0` appears
+- `lsmod | grep spi` shows modules such as `spi_bcm2835` and `spidev`
+- ADC-related scripts such as `mcp_read_all.py` can read changing values when physical controls are moved
+
+**中文**  
+当满足以下条件时，可以认为 SPI 已经可用：
+- 出现类似 `/dev/spidev0.0` 的设备路径
+- `lsmod | grep spi` 能显示 `spi_bcm2835` 和 `spidev` 等模块
+- 运行 `mcp_read_all.py` 之类的 ADC 脚本时，在移动实体控制器后能读到变化的数值
 
 ### 8.3 Unity Setup Procedure / 8.3 Unity 配置流程
 
@@ -918,34 +950,38 @@ The Raspberry Pi to Unity integration was validated in the lab environment. Evid
 
 **English**  
 Troubleshooting is mainly performed on three platforms:
-- Raspberry Pi terminal
-- Windows PowerShell
+- Windows PowerShell before SSH login
+- Raspberry Pi remote shell after SSH login
 - Unity Console
 
 **中文**  
 故障排查主要在三个平台进行：
-- 树莓派终端
-- Windows PowerShell
+- SSH 登录前的 Windows PowerShell
+- SSH 登录后的树莓派远程 Shell
 - Unity Console
 
 ### 11.2 Troubleshooting Table / 11.2 排查表
 
 | Problem | Platform | Tool or Command | Suggested Check |
 | --- | --- | --- | --- |
-| Cannot find Raspberry Pi IP | Windows PowerShell | `arp -a` | confirm local network entry |
-| Cannot connect by SSH | Windows PowerShell | `ssh xlab@<ip>` | confirm power, IP, and network |
-| No joystick or encoder response | Raspberry Pi terminal | `watch_gpio.py` | confirm digital signal changes |
-| No analog response | Raspberry Pi terminal | `mcp_read_all.py` | confirm ADC channel changes |
-| No joystick press detection | Raspberry Pi terminal | `joy_click_test.py` | confirm `JOYBTN` or click value |
+| Cannot find Raspberry Pi IP | Windows PowerShell before SSH | `arp -a` | confirm local network entry |
+| Cannot connect by SSH | Windows PowerShell before SSH | `ssh xlab@<ip>` | confirm power, IP, and network |
+| SPI device missing | Raspberry Pi remote shell | `ls /dev/spidev*` | confirm SPI device path exists |
+| SPI module missing | Raspberry Pi remote shell | `lsmod | grep spi` | confirm `spi_bcm2835` and `spidev` are loaded |
+| No joystick or encoder response | Raspberry Pi remote shell | `watch_gpio.py` | confirm digital signal changes |
+| No analog response | Raspberry Pi remote shell | `mcp_read_all.py` | confirm ADC channel changes |
+| No joystick press detection | Raspberry Pi remote shell | `joy_click_test.py` | confirm `JOYBTN` or click value |
 | Unity receives nothing | Unity Console | Console logs | confirm port `5005` and message output |
 
 | 问题 | 平台 | 工具或命令 | 建议检查项 |
 | --- | --- | --- | --- |
-| 找不到树莓派 IP | Windows PowerShell | `arp -a` | 确认局域网设备条目 |
-| 无法 SSH 连接 | Windows PowerShell | `ssh xlab@<ip>` | 确认电源、IP 和网络 |
-| 摇杆或旋钮无反应 | 树莓派终端 | `watch_gpio.py` | 确认数字信号变化 |
-| 模拟输入无反应 | 树莓派终端 | `mcp_read_all.py` | 确认 ADC 通道变化 |
-| 摇杆按下无检测 | 树莓派终端 | `joy_click_test.py` | 确认 `JOYBTN` 或点击计数 |
+| 找不到树莓派 IP | SSH 登录前的 Windows PowerShell | `arp -a` | 确认局域网设备条目 |
+| 无法 SSH 连接 | SSH 登录前的 Windows PowerShell | `ssh xlab@<ip>` | 确认电源、IP 和网络 |
+| 找不到 SPI 设备 | 树莓派远程 Shell | `ls /dev/spidev*` | 确认 SPI 设备路径是否存在 |
+| SPI 模块未加载 | 树莓派远程 Shell | `lsmod | grep spi` | 确认 `spi_bcm2835` 和 `spidev` 是否已加载 |
+| 摇杆或旋钮无反应 | 树莓派远程 Shell | `watch_gpio.py` | 确认数字信号变化 |
+| 模拟输入无反应 | 树莓派远程 Shell | `mcp_read_all.py` | 确认 ADC 通道变化 |
+| 摇杆按下无检测 | 树莓派远程 Shell | `joy_click_test.py` | 确认 `JOYBTN` 或点击计数 |
 | Unity 没有收到消息 | Unity Console | Console 日志 | 确认端口 `5005` 和消息输出 |
 
 ---
