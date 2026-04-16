@@ -698,20 +698,78 @@ The implementation environment includes Unity `6000.0.62f1`, C# scripting, Andro
 ### 6.3 PiSystemBridge.cs / 6.3 PiSystemBridge.cs 说明
 
 **English**  
-`PiSystemBridge.cs` is the communication bridge between Raspberry Pi and Unity. It listens on UDP port `5005`, receives messages such as `JOYBTN`, `JOY:UP`, `SLIDER1:<value>`, `BTN3`, and encoder commands, then maps them to menu actions, map behavior, zoom behavior, or rotation behavior. In the current implementation, `BTN3` toggles encoder 3 between zoom mode and rotate mode.
+`PiSystemBridge.cs` is the communication bridge between Raspberry Pi and Unity. It listens on UDP port `5005`, receives text-based control messages from the Raspberry Pi, and maps them to Unity-side actions.
+
+The script handles the following categories of messages:
+- `SLIDER1:<value>` and `SLIDER2:<value>` update the horizontal and vertical slider state in Unity
+- `RIVER:<name>` updates the currently hovered river
+- `JOYBTN` confirms the hovered river in map selection mode, or confirms the current menu action in menu mode
+- `JOY:LEFT`, `JOY:RIGHT`, `JOY:UP`, and `JOY:DOWN` move menu selection
+- `ENC1:*` changes the map style index
+- `ENC2:*` steps through menu focus
+- `BTN3` toggles encoder 3 between zoom mode and rotate mode
+- `ENC3:*` either zooms the map or rotates the map horizontally, depending on the current encoder 3 mode
+
+The current implementation uses a boolean state named `enc3ZoomMode`. When this state is `true`, encoder 3 changes map scale. When it is `false`, encoder 3 rotates the map around the vertical axis.
 
 **中文**  
-`PiSystemBridge.cs` 是树莓派与 Unity 之间的通信桥接模块。它在 UDP 端口 `5005` 上监听，接收 `JOYBTN`、`JOY:UP`、`SLIDER1:<value>`、`BTN3` 以及旋钮指令等消息，并将其映射为菜单动作、地图行为、缩放行为或旋转行为。在当前实现中，`BTN3` 用于在旋钮 3 的缩放模式与旋转模式之间切换。
+`PiSystemBridge.cs` 是树莓派与 Unity 之间的通信桥接模块。它在 UDP 端口 `5005` 上监听，接收来自树莓派的文本控制消息，并将其映射为 Unity 侧动作。
+
+该脚本主要处理以下几类消息：
+- `SLIDER1:<value>` 和 `SLIDER2:<value>`：更新 Unity 中的横向与纵向滑杆状态
+- `RIVER:<name>`：更新当前悬停的河流
+- `JOYBTN`：在地图选择模式下确认当前河流，在菜单模式下确认当前菜单动作
+- `JOY:LEFT`、`JOY:RIGHT`、`JOY:UP`、`JOY:DOWN`：移动菜单选择
+- `ENC1:*`：切换地图样式索引
+- `ENC2:*`：步进菜单焦点
+- `BTN3`：在旋钮 3 的缩放模式与旋转模式之间切换
+- `ENC3:*`：根据旋钮 3 当前模式执行地图缩放或地图左右旋转
+
+当前实现中使用了一个名为 `enc3ZoomMode` 的布尔状态。当该状态为 `true` 时，旋钮 3 用于改变地图缩放比例；当该状态为 `false` 时，旋钮 3 用于绕垂直轴旋转地图。
 
 ### 6.4 WaterSystemManager.cs / 6.4 WaterSystemManager.cs 说明
 
 **English**  
-`WaterSystemManager.cs` manages selected river state, class toggles, dataset toggles, date filtering, parameter filtering, and chart refresh behavior.
+`WaterSystemManager.cs` manages selected river state, class toggles, dataset toggles, date filtering, parameter filtering, and chart refresh behavior. It is the main Unity-side logic controller for data-dependent UI state and chart updates after input has already been interpreted by `PiSystemBridge.cs`.
 
 **中文**  
-`WaterSystemManager.cs` 负责管理已选河流状态、水质等级切换、数据集切换、日期筛选、参数筛选以及图表刷新行为。
+`WaterSystemManager.cs` 负责管理已选河流状态、水质等级切换、数据集切换、日期筛选、参数筛选以及图表刷新行为。它是 Unity 侧与数据相关的主要逻辑控制器，在 `PiSystemBridge.cs` 完成输入解释后继续负责界面状态与图表更新。
 
-### 6.5 Unity Hand Interaction / 6.5 Unity 手部交互
+### 6.5 Unity Runtime Behavior / 6.5 Unity 运行时行为
+
+**English**  
+At runtime, Unity responds to Raspberry Pi input in two main stages:
+
+1. **Map selection stage**
+- slider intersection determines river hover position
+- `JOYBTN` confirms the currently hovered river
+- `ENC1` changes map style
+
+2. **Menu interaction stage**
+- `ENC2` changes current menu focus
+- joystick directions move within the active menu
+- `JOYBTN` confirms the current menu item or selection
+- `ENC3` controls map zoom or map rotation, depending on encoder 3 mode
+
+This two-stage interaction structure is important because the same physical control may have different effects depending on the current Unity state.
+
+**中文**  
+在运行时，Unity 对树莓派输入的响应主要分为两个阶段：
+
+1. **地图选择阶段**
+- 通过滑杆交点决定当前悬停河流
+- `JOYBTN` 用于确认当前悬停的河流
+- `ENC1` 用于切换地图样式
+
+2. **菜单交互阶段**
+- `ENC2` 用于切换当前菜单焦点
+- 摇杆方向输入用于在当前菜单内移动选择
+- `JOYBTN` 用于确认当前菜单项或筛选项
+- `ENC3` 根据当前模式控制地图缩放或地图旋转
+
+这种双阶段交互结构很重要，因为同一个实体输入在不同的 Unity 状态下可能产生不同的效果。
+
+### 6.6 Unity Hand Interaction / 6.6 Unity 手部交互
 
 **English**  
 The project also includes hand interaction support inside Unity for mixed reality runtime, but the current documentation prioritizes the physical Raspberry Pi control path because that is the main handover requirement.
@@ -891,10 +949,26 @@ Normal runtime startup order:
 ### 9.2 User Operation Flow / 9.2 用户操作流程
 
 **English**  
-The user first selects map style, then selects a river, then performs RI and data filtering. Sliders, joystick, and encoders are used to navigate and confirm actions.
+The user first selects map style, then hovers and confirms a river, and then performs RI and data filtering. The typical runtime interaction sequence is:
+1. use `ENC1` to switch map style if needed
+2. move the horizontal and vertical sliders to position the river-selection intersection
+3. confirm the hovered river with `JOYBTN`
+4. use `ENC2` to move menu focus
+5. use joystick directions to change the active menu selection
+6. use `JOYBTN` again to confirm the current menu item
+7. use `BTN3` if encoder 3 control needs to switch between zoom and rotation
+8. rotate `ENC3` to zoom the map or rotate it horizontally depending on the current mode
 
 **中文**  
-用户首先选择地图样式，然后选择河流，接着进行 RI 和数据筛选。滑杆、摇杆和旋钮用于导航与确认操作。
+用户首先选择地图样式，然后悬停并确认河流，接着进行 RI 和数据筛选。典型运行时交互顺序如下：
+1. 如有需要，先用 `ENC1` 切换地图样式
+2. 移动横向和纵向滑杆，定位河流选择交点
+3. 使用 `JOYBTN` 确认当前悬停河流
+4. 使用 `ENC2` 切换菜单焦点
+5. 使用摇杆方向输入改变当前菜单中的选择项
+6. 再次使用 `JOYBTN` 确认当前菜单项
+7. 如果需要切换旋钮 3 的控制功能，则按下 `BTN3`
+8. 旋转 `ENC3`，根据当前模式执行地图缩放或左右旋转
 
 ---
 
