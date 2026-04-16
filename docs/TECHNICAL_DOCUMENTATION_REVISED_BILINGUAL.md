@@ -978,26 +978,38 @@ The user first selects map style, then hovers and confirms a river, and then per
 ### 10.1 Testing Objectives / 10.1 测试目标
 
 **English**  
-Testing focused on verifying physical input mapping, UDP communication, Unity message handling, and chart update behavior.
+Testing focused on verifying four areas of the prototype:
+- physical input mapping
+- MCP3008 analog reading
+- UDP communication between Raspberry Pi and Unity
+- Unity-side response and chart-related behavior
 
 **中文**  
-测试重点包括验证实体输入映射、UDP 通信、Unity 消息处理以及图表更新行为。
+测试重点覆盖原型的四个方面：
+- 实体输入映射
+- MCP3008 模拟量读取
+- 树莓派与 Unity 之间的 UDP 通信
+- Unity 侧响应与图表相关行为
 
 ### 10.2 Lab Validation Evidence / 10.2 实验室验证证据
 
 **English**  
-The Raspberry Pi to Unity integration was validated in the lab environment. Evidence includes:
-- verified GPIO and ADC mappings
+The Raspberry Pi to Unity integration was validated in the lab environment before documentation finalization. The validation evidence used in this document includes:
+- verified GPIO and ADC mappings recorded during lab inspection
 - runtime terminal output such as `JOY:UP`, `JOY:DOWN`, `JOY:LEFT`, `JOY:RIGHT`, and `JOYBTN`
 - matching sender-side Python logic and receiver-side Unity logic
-- archived scripts and handover notes stored in GitHub
+- archived scripts and handover notes stored in the GitHub handover repository
+
+This evidence is sufficient to support the claim that the Raspberry Pi control path was operational during lab testing, even though the hardware is not continuously available outside the lab environment.
 
 **中文**  
-树莓派到 Unity 的集成已经在实验室环境中完成验证。证据包括：
-- 已确认的 GPIO 与 ADC 映射
+树莓派到 Unity 的集成已在文档定稿前的实验室环境中完成验证。本文件采用的验证证据包括：
+- 在实验室检查中确认的 GPIO 与 ADC 映射
 - 运行终端输出，例如 `JOY:UP`、`JOY:DOWN`、`JOY:LEFT`、`JOY:RIGHT` 和 `JOYBTN`
-- 树莓派发送端 Python 逻辑与 Unity 接收端逻辑的对应关系
-- 已保存到 GitHub 的脚本与交接资料
+- 树莓派发送端 Python 逻辑与 Unity 接收端逻辑之间的对应关系
+- 已归档到 GitHub 交接仓库中的脚本与交接记录
+
+这些证据足以支持“树莓派控制路径在实验室测试中可正常工作”的结论，即使当前硬件并不能在实验室外持续访问。
 
 ### 10.3 Test Scripts Used / 10.3 使用的测试脚本
 
@@ -1014,6 +1026,28 @@ The Raspberry Pi to Unity integration was validated in the lab environment. Evid
 | `mcp_read_all.py` | 识别 ADC 通道变化 |
 | `joy_click_test.py` | 验证摇杆移动和按下 |
 | `udp_test_send.py` | 验证 UDP 通路 |
+
+### 10.4 Validation Conclusion / 10.4 验证结论
+
+**English**  
+Based on the available test evidence, the current prototype can be considered functionally validated at the integration level for:
+- Raspberry Pi physical input capture
+- MCP3008 analog channel reading
+- UDP message transmission
+- Unity-side command reception
+- basic interaction flow from map selection to data filtering
+
+This conclusion should be interpreted as a validated prototype result rather than a long-term production guarantee.
+
+**中文**  
+基于现有测试证据，当前原型在集成层面可以认为已经完成以下功能验证：
+- 树莓派实体输入采集
+- MCP3008 模拟通道读取
+- UDP 消息发送
+- Unity 侧命令接收
+- 从地图选择到数据筛选的基础交互流程
+
+该结论应被理解为“已验证的原型结果”，而不是“面向长期生产环境的稳定性保证”。
 
 ---
 
@@ -1064,18 +1098,30 @@ Troubleshooting is mainly performed on three platforms:
 ## 12. 已知问题与限制
 
 **English**  
-Current limitations include:
-- dense breadboard wiring makes visual tracing difficult
-- system depends on stable local network communication
-- analog input may require threshold tuning
-- some final physical pin references should still be rechecked if a full hardware redraw is required
+The current prototype has several documented limitations that should be considered during review, reproduction, and future maintenance:
+
+- dense breadboard wiring makes full visual wire tracing difficult
+- the Raspberry Pi control path depends on stable local network communication
+- analog input behavior may require threshold tuning or recalibration
+- some final physical pin references should still be rechecked if a fully pin-accurate hardware redraw is required
+- the current system should be treated as a validated prototype rather than a production-hardened deployment
 
 **中文**  
-当前限制包括：
-- 面包板接线密集，难以通过肉眼完整追踪
-- 系统依赖稳定的局域网通信
-- 模拟输入可能需要阈值调节
-- 若后续需要严格的硬件重绘图，部分最终物理引脚仍建议再次核对
+当前原型存在若干已记录的限制，在评审、复现和后续维护时应予以考虑：
+
+- 面包板接线密集，难以通过肉眼完整追踪所有导线
+- 树莓派控制路径依赖稳定的局域网通信
+- 模拟输入行为可能需要阈值调节或重新校准
+- 若后续需要严格到引脚级别的硬件重绘图，部分最终物理引脚仍建议再次核对
+- 当前系统应被视为“已验证的原型”，而不是“经过长期强化的生产部署版本”
+
+### 12.1 Documentation Limitation / 12.1 文档限制说明
+
+**English**  
+Because the Raspberry Pi hardware is lab-dependent, certain evidence in this document is based on recorded validation rather than live re-execution during final writing. This limitation does not invalidate the documentation, but it should be acknowledged explicitly.
+
+**中文**  
+由于树莓派硬件依赖实验室环境，本文件中的部分证据基于已记录的验证结果，而不是在最终写作阶段再次现场重跑得到。这一限制并不会使文档失效，但需要明确说明。
 
 ---
 
