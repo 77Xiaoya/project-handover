@@ -65,3 +65,4 @@
 - `slider-wiring.md`: detailed horizontal and vertical slider wiring notes
 - `encoder-wiring.md`: detailed encoder pin, power, and GPIO notes
 - `raspberry-pi-section-bilingual.md`: bilingual Raspberry Pi documentation draft for report writing
+- `TECHNICAL_DOCUMENTATION_REVISED_BILINGUAL.md`: full revised bilingual technical document aligned to meeting comments

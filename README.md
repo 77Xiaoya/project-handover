@@ -40,5 +40,6 @@ This folder is a GitHub-ready handover package for the Raspberry Pi to Unity int
 - Detailed slider wiring notes: `docs/slider-wiring.md`
 - Detailed encoder wiring notes: `docs/encoder-wiring.md`
 - Raspberry Pi bilingual document draft: `docs/raspberry-pi-section-bilingual.md`
+- Full revised bilingual technical document: `docs/TECHNICAL_DOCUMENTATION_REVISED_BILINGUAL.md`
 
 See `docs/script-purposes.md` for detailed explanations.
