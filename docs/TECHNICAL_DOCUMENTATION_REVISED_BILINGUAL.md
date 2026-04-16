@@ -366,27 +366,47 @@ The Raspberry Pi Zero acts as the hardware input controller of the system. It re
 **中文**  
 树莓派 Zero 在本系统中充当硬件输入控制器。它负责读取摇杆、滑杆和旋钮编码器的输入，在 Python 中完成处理后，再通过 UDP 将控制消息发送到 Unity。
 
-### 5.3 Software Used on Raspberry Pi / 5.3 树莓派所用软件
+### 5.3 Raspberry Pi Access Method / 5.3 树莓派访问方式
 
 **English**  
-The Raspberry Pi side uses Raspberry Pi OS and Python 3. The main Python libraries used are:
+In this project, commands were entered from **Windows PowerShell** on the PC. PowerShell was used as the access platform to reach the Raspberry Pi remotely through SSH. After running `ssh xlab@192.168.50.38`, the command session was no longer acting on Windows directly. Instead, the user was working inside a remote Raspberry Pi shell through the SSH connection.
+
+This means the workflow has two layers:
+- **Access platform:** Windows PowerShell on the PC
+- **Actual execution environment:** Raspberry Pi OS after SSH login
+
+Therefore, commands such as `dir`, `nano pi_input_sender.py`, and `python3 pi_input_sender.py` were typed in a PowerShell window, but they were executed remotely on the Raspberry Pi through the SSH session.
+
+**中文**  
+在本项目中，所有命令最初都是在电脑端的 **Windows PowerShell** 中输入的。PowerShell 作为访问平台，用于通过 SSH 远程连接树莓派。在执行 `ssh xlab@192.168.50.38` 之后，命令会话就不再直接作用于 Windows，而是进入树莓派的远程 Shell 环境。
+
+也就是说，整个流程分为两层：
+- **访问平台：** 电脑上的 Windows PowerShell
+- **实际执行环境：** SSH 登录后的 Raspberry Pi OS
+
+因此，像 `dir`、`nano pi_input_sender.py` 和 `python3 pi_input_sender.py` 这些命令，虽然是在 PowerShell 窗口里输入的，但它们实际上是通过 SSH 会话在树莓派上执行的。
+
+### 5.4 Software Used on Raspberry Pi / 5.4 树莓派所用软件
+
+**English**  
+The Raspberry Pi side uses Raspberry Pi OS and Python 3 as the actual runtime environment. The main Python libraries used are:
 - `gpiozero` for digital input reading
 - `spidev` for reading analog values through MCP3008 via SPI
 - `socket` for UDP communication
 - `threading` for parallel input loops
 
-The final integrated runtime script is `pi_input_sender.py`.
+The final integrated runtime script is `pi_input_sender.py`. In other words, Windows PowerShell was the command-entry interface, while Raspberry Pi OS and Python 3 were the actual execution environment for the hardware-side logic.
 
 **中文**  
-树莓派端使用 Raspberry Pi OS 和 Python 3。项目中主要使用以下 Python 库：
+树莓派端真正的运行环境是 Raspberry Pi OS 和 Python 3。项目中主要使用以下 Python 库：
 - `gpiozero`：读取数字输入
 - `spidev`：通过 SPI 与 MCP3008 通信并读取模拟量
 - `socket`：实现 UDP 通信
 - `threading`：并行运行多个输入读取循环
 
-最终整合使用的主脚本为 `pi_input_sender.py`。
+最终整合使用的主脚本为 `pi_input_sender.py`。也就是说，Windows PowerShell 是输入命令的界面，而 Raspberry Pi OS 与 Python 3 才是硬件逻辑真正执行的环境。
 
-### 5.4 Reading Physical Input / 5.4 物理输入读取方式
+### 5.5 Reading Physical Input / 5.5 物理输入读取方式
 
 **English**  
 The project uses two types of physical input:
@@ -406,7 +426,7 @@ Digital inputs are read directly from Raspberry Pi GPIO pins, while analog input
 
 数字输入可直接通过树莓派 GPIO 引脚读取，而模拟输入则需要先经过 MCP3008 转换，之后才能在 Python 中处理。
 
-### 5.5 MCP3008 Analog Conversion / 5.5 MCP3008 模拟量转换
+### 5.6 MCP3008 Analog Conversion / 5.6 MCP3008 模拟量转换
 
 **English**  
 Raspberry Pi cannot directly read analog voltage. Therefore, the project uses MCP3008, an analog-to-digital converter (ADC), to convert slider and joystick analog signals into digital values. These values are then read through SPI using the `spidev` library.
@@ -426,7 +446,7 @@ Channel mapping:
 - `CH5`：摇杆左右方向
 - `CH6`：摇杆上下方向
 
-### 5.6 UDP Communication to Unity / 5.6 发送到 Unity 的 UDP 通信
+### 5.7 UDP Communication to Unity / 5.7 发送到 Unity 的 UDP 通信
 
 **English**  
 UDP communication on the Raspberry Pi is implemented using Python's `socket` library. On the Unity side, UDP messages are received by `PiSystemBridge.cs` through `UdpClient`. The communication port used in this project is `5005`.
@@ -437,6 +457,7 @@ Example messages include:
 - `JOY:UP`
 - `JOY:DOWN`
 - `JOYBTN`
+- `BTN3`
 - `SLIDER1:<value>`
 - `SLIDER2:<value>`
 - `ENC1:1` or `ENC1:-1`
@@ -452,15 +473,16 @@ Example messages include:
 - `JOY:UP`
 - `JOY:DOWN`
 - `JOYBTN`
+- `BTN3`
 - `SLIDER1:<value>`
 - `SLIDER2:<value>`
 - `ENC1:1` 或 `ENC1:-1`
 - `ENC2:1` 或 `ENC2:-1`
 - `ENC3:1` 或 `ENC3:-1`
 
-### 5.7 Detailed Wiring Procedure / 5.7 详细插线步骤
+### 5.8 Detailed Wiring Procedure / 5.8 详细插线步骤
 
-#### 5.7.1 Joystick / 5.7.1 摇杆
+#### 5.8.1 Joystick / 5.8.1 摇杆
 
 **English**  
 The joystick module has five main pins: `VCC`, `GND`, `VRx`, `VRy`, and `SW`.
@@ -496,7 +518,7 @@ Verification:
 - 上下移动 -> `CH6` 变化
 - 按下摇杆 -> 终端输出 `JOYBTN`
 
-#### 5.7.2 Horizontal Slider / 5.7.2 横向滑杆
+#### 5.8.2 Horizontal Slider / 5.8.2 横向滑杆
 
 **English**  
 The horizontal slider has three main connections: `VCC`, `GND`, and `OUT`.
@@ -528,7 +550,7 @@ Verification:
 - 滑杆移动时 `CH1` 变化
 - 主脚本输出 `SLIDER1:<value>`
 
-#### 5.7.3 Vertical Slider / 5.7.3 纵向滑杆
+#### 5.8.3 Vertical Slider / 5.8.3 纵向滑杆
 
 **English**  
 The vertical slider also has `VCC`, `GND`, and `OUT`.
@@ -560,7 +582,7 @@ Verification:
 - 滑杆移动时 `CH3` 变化
 - 主脚本输出 `SLIDER2:<value>`
 
-#### 5.7.4 Rotary Encoders / 5.7.4 旋钮编码器
+#### 5.8.4 Rotary Encoders / 5.8.4 旋钮编码器
 
 **English**  
 Encoder 1 wiring:
@@ -588,6 +610,11 @@ Verification:
 - rotation outputs `ENCx:1` or `ENCx:-1`
 - button press outputs `BTNx`
 
+For encoder 3 specifically:
+- rotating the encoder changes the map scale when encoder 3 is in zoom mode
+- pressing the encoder sends `BTN3` and toggles encoder 3 between **Zoom mode** and **Rotate mode**
+- after switching to rotate mode, rotating encoder 3 rotates the map horizontally instead of zooming
+
 **中文**  
 旋钮 1 接线：
 - `VCC -> 5V 正电源轨 row 1`
@@ -614,7 +641,12 @@ Verification:
 - 旋转输出 `ENCx:1` 或 `ENCx:-1`
 - 按下输出 `BTNx`
 
-### 5.8 Wiring Verification Strategy / 5.8 接线验证策略
+对于旋钮 3，还需要特别说明：
+- 当旋钮 3 处于缩放模式时，旋转会改变地图缩放比例
+- 按下旋钮 3 会发送 `BTN3`，并在**缩放模式**与**旋转模式**之间切换
+- 切换到旋转模式后，再旋转旋钮 3 时，地图会进行左右方向旋转，而不是继续缩放
+
+### 5.9 Wiring Verification Strategy / 5.9 接线验证策略
 
 **English**  
 Because the breadboard wiring is dense and difficult to follow visually, the final mapping was not validated by photographs alone. It was confirmed using:
@@ -666,10 +698,10 @@ The implementation environment includes Unity `6000.0.62f1`, C# scripting, Andro
 ### 6.3 PiSystemBridge.cs / 6.3 PiSystemBridge.cs 说明
 
 **English**  
-`PiSystemBridge.cs` is the communication bridge between Raspberry Pi and Unity. It listens on UDP port `5005`, receives messages such as `JOYBTN`, `JOY:UP`, `SLIDER1:<value>`, and encoder commands, then maps them to menu actions, map behavior, or zoom behavior.
+`PiSystemBridge.cs` is the communication bridge between Raspberry Pi and Unity. It listens on UDP port `5005`, receives messages such as `JOYBTN`, `JOY:UP`, `SLIDER1:<value>`, `BTN3`, and encoder commands, then maps them to menu actions, map behavior, zoom behavior, or rotation behavior. In the current implementation, `BTN3` toggles encoder 3 between zoom mode and rotate mode.
 
 **中文**  
-`PiSystemBridge.cs` 是树莓派与 Unity 之间的通信桥接模块。它在 UDP 端口 `5005` 上监听，接收 `JOYBTN`、`JOY:UP`、`SLIDER1:<value>` 以及旋钮指令等消息，并将其映射为菜单动作、地图行为或缩放行为。
+`PiSystemBridge.cs` 是树莓派与 Unity 之间的通信桥接模块。它在 UDP 端口 `5005` 上监听，接收 `JOYBTN`、`JOY:UP`、`SLIDER1:<value>`、`BTN3` 以及旋钮指令等消息，并将其映射为菜单动作、地图行为、缩放行为或旋转行为。在当前实现中，`BTN3` 用于在旋钮 3 的缩放模式与旋转模式之间切换。
 
 ### 6.4 WaterSystemManager.cs / 6.4 WaterSystemManager.cs 说明
 
@@ -714,21 +746,23 @@ The current UI supports switching between existing and prediction datasets. This
 | --- | --- |
 | `JOY:LEFT/RIGHT/UP/DOWN` | directional navigation |
 | `JOYBTN` | confirmation action |
+| `BTN3` | toggle encoder 3 mode between zoom and rotate |
 | `SLIDER1:<value>` | horizontal slider update |
 | `SLIDER2:<value>` | vertical slider update |
 | `ENC1:*` | encoder 1 rotation input |
 | `ENC2:*` | menu stepping |
-| `ENC3:*` | zoom stepping |
+| `ENC3:*` | zoom stepping or horizontal map rotation depending on encoder 3 mode |
 
 | 树莓派消息 | Unity 含义 |
 | --- | --- |
 | `JOY:LEFT/RIGHT/UP/DOWN` | 方向导航 |
 | `JOYBTN` | 确认动作 |
+| `BTN3` | 切换旋钮 3 的缩放模式与旋转模式 |
 | `SLIDER1:<value>` | 横向滑杆更新 |
 | `SLIDER2:<value>` | 纵向滑杆更新 |
 | `ENC1:*` | 旋钮 1 旋转输入 |
 | `ENC2:*` | 菜单步进 |
-| `ENC3:*` | 缩放步进 |
+| `ENC3:*` | 根据旋钮 3 当前模式执行缩放步进或地图左右旋转 |
 
 ---
 
@@ -754,11 +788,12 @@ Recommended setup procedure:
 5. After login, run `dir` to confirm that `pi_input_sender.py` is present.
 6. If needed, edit the script with `nano pi_input_sender.py`.
 7. Update `UNITY_IP` and `UNITY_PORT` if necessary.
-8. Ensure SPI is enabled on the Raspberry Pi.
-9. Run `python3 pi_input_sender.py`.
-10. Watch for outgoing message activity in the Raspberry Pi terminal.
+8. Ensure SPI is enabled on the Raspberry Pi by running `sudo raspi-config`, then go to `Interface Options -> SPI -> Enable`.
+9. Reboot the Raspberry Pi if SPI was just enabled.
+10. Reconnect through SSH and run `python3 pi_input_sender.py`.
+11. Watch for outgoing message activity in the Raspberry Pi terminal.
 
-The Python script is executed on the Raspberry Pi terminal after SSH login. Windows PowerShell is only used to access the device. Google Colab is not used in this project.
+The commands are entered in a Windows PowerShell window, but after SSH login they are executed remotely in the Raspberry Pi environment. Google Colab is not used in this project.
 
 **中文**  
 推荐配置流程如下：
@@ -769,11 +804,12 @@ The Python script is executed on the Raspberry Pi terminal after SSH login. Wind
 5. 登录后输入 `dir`，确认 `pi_input_sender.py` 存在。
 6. 如有需要，使用 `nano pi_input_sender.py` 修改脚本。
 7. 根据需要更新 `UNITY_IP` 和 `UNITY_PORT`。
-8. 确认树莓派已经启用 SPI。
-9. 输入 `python3 pi_input_sender.py` 运行脚本。
-10. 在树莓派终端观察是否有消息持续输出。
+8. 通过 `sudo raspi-config` 确认树莓派已启用 SPI，然后进入 `Interface Options -> SPI -> Enable`。
+9. 如果刚启用 SPI，则重启树莓派。
+10. 重新通过 SSH 登录后，输入 `python3 pi_input_sender.py` 运行脚本。
+11. 在树莓派终端观察是否有消息持续输出。
 
-Python 脚本是在 SSH 登录后的树莓派终端中运行的。Windows PowerShell 仅用于远程连接树莓派。本项目不使用 Google Colab。
+命令是在 Windows PowerShell 窗口中输入的，但在 SSH 登录后，它们实际上是在树莓派的远程环境中执行的。本项目不使用 Google Colab。
 
 ### 8.3 Unity Setup Procedure / 8.3 Unity 配置流程
 
@@ -804,19 +840,21 @@ Unity 端流程如下：
 Normal runtime startup order:
 1. Power on Raspberry Pi.
 2. Confirm network connection.
-3. Run `pi_input_sender.py`.
-4. Open Unity project and scene.
-5. Press Play in Unity.
-6. Verify message activity and scene behavior.
+3. Use Windows PowerShell to connect through SSH.
+4. Run `pi_input_sender.py` in the Raspberry Pi remote shell.
+5. Open Unity project and scene.
+6. Press Play in Unity.
+7. Verify message activity and scene behavior.
 
 **中文**  
 正常运行时的启动顺序如下：
 1. 打开树莓派电源。
 2. 确认网络连接正常。
-3. 运行 `pi_input_sender.py`。
-4. 打开 Unity 项目和场景。
-5. 在 Unity 中点击 Play。
-6. 确认有消息输出且场景行为正常。
+3. 通过 Windows PowerShell 使用 SSH 连接树莓派。
+4. 在树莓派远程 Shell 中运行 `pi_input_sender.py`。
+5. 打开 Unity 项目和场景。
+6. 在 Unity 中点击 Play。
+7. 确认有消息输出且场景行为正常。
 
 ### 9.2 User Operation Flow / 9.2 用户操作流程
 
