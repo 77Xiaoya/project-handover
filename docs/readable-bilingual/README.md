@@ -4,14 +4,15 @@ This folder contains a split, readability-focused version of the final technical
 
 ## Recommended Reading Order
 
-1. `00-final-report-writing-guide.md`
-2. `01-overview.md`
-3. `02-raspberry-pi.md`
-4. `03-unity-environment.md`
-5. `04-unity-scripts-and-inspector.md`
-6. `05-setup-and-operation.md`
-7. `06-testing-and-troubleshooting.md`
-8. `07-handover-and-links.md`
+1. `FINAL_WORD_REPORT_OUTLINE.md`
+2. `00-final-report-writing-guide.md`
+3. `01-overview.md`
+4. `02-raspberry-pi.md`
+5. `03-unity-environment.md`
+6. `04-unity-scripts-and-inspector.md`
+7. `05-setup-and-operation.md`
+8. `06-testing-and-troubleshooting.md`
+9. `07-handover-and-links.md`
 
 ## Notes
 
