@@ -103,7 +103,7 @@ This document is written as a technical handover reference rather than an academ
 3. System Overview / 系统总览  
 4. System Architecture / 系统架构  
 5. Raspberry Pi and Hardware Documentation / 树莓派与硬件文档  
-6. Unity and Software Documentation / Unity 与软件文档  
+6. Unity Environment Reconstruction Guide / Unity 环境重建指南  
 7. Data and Communication Documentation / 数据与通信文档  
 8. Installation and Deployment Guide / 安装与部署指南  
 9. Operation Manual / 操作手册  
@@ -718,10 +718,10 @@ Because the breadboard wiring is dense and difficult to follow visually, the fin
 
 ---
 
-## 6. Unity and Software Documentation
-## 6. Unity 与软件文档
+## 6. Unity Environment Reconstruction Guide
+## 6. Unity 环境重建指南
 
-### 6.1 Development Environment / 6.1 开发环境
+### 6.1 Unity Development Environment / 6.1 Unity 开发环境
 
 **English**  
 The implementation environment includes Unity `6000.0.62f1`, C# scripting, Android/XR build workflow, and supporting packages such as TextMeshPro and Unity UI.
@@ -729,7 +729,7 @@ The implementation environment includes Unity `6000.0.62f1`, C# scripting, Andro
 **中文**  
 实现环境包括 Unity `6000.0.62f1`、C# 脚本、Android/XR 构建流程，以及 TextMeshPro、Unity UI 等支持包。
 
-### 6.2 Key Project Files / 6.2 关键项目文件
+### 6.2 Key Unity Files / 6.2 Unity 关键文件
 
 | File or Folder | Purpose |
 | --- | --- |
@@ -751,7 +751,7 @@ The implementation environment includes Unity `6000.0.62f1`, C# scripting, Andro
 | `Packages/manifest.json` | Unity 包配置 |
 | `ProjectSettings/ProjectVersion.txt` | Unity 版本记录 |
 
-### 6.3 PiSystemBridge.cs / 6.3 PiSystemBridge.cs 说明
+### 6.3 PiSystemBridge.cs Message Bridge / 6.3 PiSystemBridge.cs 消息桥接说明
 
 **English**  
 `PiSystemBridge.cs` is the communication bridge between Raspberry Pi and Unity. It listens on UDP port `5005`, receives text-based control messages from the Raspberry Pi, and maps them to Unity-side actions.
@@ -783,7 +783,7 @@ The current implementation uses a boolean state named `enc3ZoomMode`. When this 
 
 当前实现中使用了一个名为 `enc3ZoomMode` 的布尔状态。当该状态为 `true` 时，旋钮 3 用于改变地图缩放比例；当该状态为 `false` 时，旋钮 3 用于绕垂直轴旋转地图。
 
-### 6.4 WaterSystemManager.cs / 6.4 WaterSystemManager.cs 说明
+### 6.4 WaterSystemManager.cs Data and UI Logic / 6.4 WaterSystemManager.cs 数据与界面逻辑
 
 **English**  
 `WaterSystemManager.cs` manages selected river state, class toggles, dataset toggles, date filtering, parameter filtering, and chart refresh behavior. It is the main Unity-side logic controller for data-dependent UI state and chart updates after input has already been interpreted by `PiSystemBridge.cs`.
@@ -791,7 +791,7 @@ The current implementation uses a boolean state named `enc3ZoomMode`. When this 
 **中文**  
 `WaterSystemManager.cs` 负责管理已选河流状态、水质等级切换、数据集切换、日期筛选、参数筛选以及图表刷新行为。它是 Unity 侧与数据相关的主要逻辑控制器，在 `PiSystemBridge.cs` 完成输入解释后继续负责界面状态与图表更新。
 
-### 6.5 Unity Runtime Behavior / 6.5 Unity 运行时行为
+### 6.5 Unity Runtime Interaction Flow / 6.5 Unity 运行时交互流程
 
 **English**  
 At runtime, Unity responds to Raspberry Pi input in two main stages:
@@ -825,7 +825,7 @@ This two-stage interaction structure is important because the same physical cont
 
 这种双阶段交互结构很重要，因为同一个实体输入在不同的 Unity 状态下可能产生不同的效果。
 
-### 6.6 Unity Hand Interaction / 6.6 Unity 手部交互
+### 6.6 Unity Hand Interaction Support / 6.6 Unity 手部交互支持
 
 **English**  
 The project also includes hand interaction support inside Unity for mixed reality runtime, but the current documentation prioritizes the physical Raspberry Pi control path because that is the main handover requirement.
@@ -957,7 +957,7 @@ SPI can be considered available when:
 - `lsmod | grep spi` 能显示 `spi_bcm2835` 和 `spidev` 等模块
 - 运行 `mcp_read_all.py` 之类的 ADC 脚本时，在移动实体控制器后能读到变化的数值
 
-### 8.3 Unity Setup Procedure / 8.3 Unity 配置流程
+### 8.3 Unity Setup Procedure and Inspector Check / 8.3 Unity 配置流程与 Inspector 检查
 
 **English**  
 The Unity side should be rebuilt and checked in the following order:
@@ -1027,7 +1027,7 @@ These scripts should not be treated as isolated files. They depend on correct sc
 
 这些脚本不能被视为彼此独立的文件，它们依赖于正确的场景引用和 Inspector 挂载关系。
 
-#### 8.3.2 Inspector Fields That Must Be Checked / 8.3.2 必须检查的 Inspector 字段
+#### 8.3.2 PiSystemBridge Inspector Fields That Must Be Checked / 8.3.2 必须检查的 PiSystemBridge Inspector 字段
 
 **English**  
 For `PiSystemBridge`, the following Inspector values are part of the current validated scene configuration:
@@ -1057,7 +1057,7 @@ If these values or object references are missing, Unity may still run, but the p
 
 如果这些数值或对象引用缺失，Unity 仍然可能运行，但实体控制器集成不会按照预期工作。
 
-#### 8.3.3 Meta Quest and MR Environment Notes / 8.3.3 Meta Quest 与 MR 环境说明
+#### 8.3.3 Meta Quest and MR Environment Rebuild Notes / 8.3.3 Meta Quest 与 MR 环境重建说明
 
 **English**  
 The current Unity project is configured around a Meta Quest Pro mixed reality workflow. From the package configuration, the project depends on Meta XR SDK packages and Unity XR packages for OpenXR, Android XR, AR Foundation, XR Hands, and XR Interaction Toolkit. Therefore, rebuilding the Unity environment for Meta Quest Pro should begin by preserving package compatibility and Android XR support rather than editing application scripts first.
