@@ -115,6 +115,62 @@ Appendices / 附录
 
 ---
 
+## Suggested Figure Placeholders
+## 建议插图占位
+
+**English**  
+The following figures are recommended for the final Word or PDF version of this document:
+- Figure 4.1 System architecture overview
+- Figure 5.1 Raspberry Pi Zero and breadboard overview
+- Figure 5.2 MCP3008 analog input flow
+- Figure 5.3 Joystick wiring reference
+- Figure 5.4 Slider wiring reference
+- Figure 5.5 Encoder wiring reference
+- Figure 6.1 Unity scene overview
+- Figure 6.2 `PiSystemBridge.cs` message handling flow
+- Figure 8.1 Raspberry Pi setup and SSH access flow
+- Figure 9.1 Runtime operation flow
+- Figure 10.1 Validation evidence screenshot set
+
+**中文**  
+建议在最终的 Word 或 PDF 版本中加入以下图示：
+- 图 4.1 系统架构总览图
+- 图 5.1 树莓派 Zero 与面包板整体图
+- 图 5.2 MCP3008 模拟输入流程图
+- 图 5.3 摇杆接线参考图
+- 图 5.4 滑杆接线参考图
+- 图 5.5 旋钮接线参考图
+- 图 6.1 Unity 场景总览图
+- 图 6.2 `PiSystemBridge.cs` 消息处理流程图
+- 图 8.1 树莓派配置与 SSH 访问流程图
+- 图 9.1 运行时操作流程图
+- 图 10.1 验证证据截图组
+
+## Suggested Table Placeholders
+## 建议表格占位
+
+**English**  
+The following tables are recommended for the final formatted version:
+- Table 5.1 Hardware component list
+- Table 5.2 Joystick, slider, and encoder mapping summary
+- Table 6.1 Key Unity files and responsibilities
+- Table 7.1 Raspberry Pi message to Unity action mapping
+- Table 8.1 Raspberry Pi setup command reference
+- Table 10.1 Test evidence summary
+- Table 11.1 Troubleshooting summary
+
+**中文**  
+建议在最终排版版本中加入以下表格：
+- 表 5.1 硬件组成清单
+- 表 5.2 摇杆、滑杆和旋钮映射汇总表
+- 表 6.1 Unity 关键文件与职责表
+- 表 7.1 树莓派消息与 Unity 动作映射表
+- 表 8.1 树莓派配置命令汇总表
+- 表 10.1 测试证据汇总表
+- 表 11.1 故障排查汇总表
+
+---
+
 ## 1. Introduction
 ## 1. 引言
 
