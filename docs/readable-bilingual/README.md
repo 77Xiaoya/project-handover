@@ -1,6 +1,6 @@
 # Readable Bilingual Documentation
 
-This folder contains a split, readability-focused version of the technical documentation.
+This folder contains a split, readability-focused version of the final technical documentation.
 
 ## Recommended Reading Order
 
@@ -18,3 +18,4 @@ This folder contains a split, readability-focused version of the technical docum
 - The full revised document is still kept for reference.
 - This split version is better suited for GitHub reading and review.
 - Unity content is intentionally split into separate files for environment rebuild and script or Inspector explanation.
+- This structure is intended for final document writing, not only for internal handover.

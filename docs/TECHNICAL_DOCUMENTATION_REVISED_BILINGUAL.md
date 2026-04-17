@@ -4,8 +4,8 @@
 ## Mixed Reality River Water Quality Visualization System
 ## 混合现实河流水质可视化系统
 
-### Revised Bilingual Technical Documentation and System Handover Draft
-### 修订版双语技术文档与系统交接草稿
+### Revised Bilingual Technical Documentation Draft
+### 修订版双语技术文档草稿
 
 Prepared by: Zhang Xiaoya  
 Supervisor: Dr. Lam Meng Chun  
@@ -44,10 +44,10 @@ Date: 17 April 2026
 ## 本次修订目的
 
 **English**  
-This revised document restructures the original draft according to meeting feedback. The main improvements focus on Raspberry Pi software explanation, MCP3008 details, UDP communication, detailed physical wiring, setup procedure, troubleshooting platforms, and a clearer document structure for technical handover.
+This revised document restructures the original draft according to meeting feedback. The main improvements focus on Raspberry Pi software explanation, MCP3008 details, UDP communication, detailed physical wiring, setup procedure, troubleshooting platforms, and a clearer structure for the final technical document.
 
 **中文**  
-本次修订根据会议反馈重新组织了原有草稿。重点补充了树莓派所用软件说明、MCP3008 细节、UDP 通信流程、详细实体接线、配置流程、故障排查平台，以及更清晰的交接型文档结构。
+本次修订根据会议反馈重新组织了原有草稿。重点补充了树莓派所用软件说明、MCP3008 细节、UDP 通信流程、详细实体接线、配置流程、故障排查平台，以及更清晰的最终技术文档结构。
 
 ---
 
@@ -59,14 +59,14 @@ This document describes the Mixed Reality River Water Quality Visualization Syst
 
 The current prototype follows a four-stage interaction path centered on `mapstyle -> river -> ri -> data`. Physical input is captured on the Raspberry Pi side, converted where necessary through MCP3008, and sent to Unity through UDP messages. Inside Unity, `PiSystemBridge.cs` acts as the communication bridge, while `WaterSystemManager.cs` manages filtering logic and chart updates.
 
-This document is written as a technical handover reference rather than an academic report. Its main goal is to help supervisors, lab members, and future developers understand how the system is built, configured, operated, tested, and maintained.
+This document is written as a technical project document rather than an academic report. Its main goal is to help supervisors, lab members, and future developers understand how the system is built, configured, operated, tested, and maintained.
 
 **中文**  
 本文件描述了在实习期间开发的混合现实河流水质可视化系统。该系统将运行在 Meta Quest Pro 上的 Unity 混合现实应用，与通过 Raspberry Pi Zero 和 MCP3008 连接的实体输入控制界面结合在一起。系统从 CSV 数据集中读取水质记录，并通过地图样式选择、河流选择、水质等级筛选、数据集切换、日期筛选和参数图表渲染实现可视化。
 
 当前原型遵循 `mapstyle -> river -> ri -> data` 的四阶段交互路径。实体输入首先在树莓派端被读取，需要时再通过 MCP3008 进行模拟量转换，之后通过 UDP 消息发送到 Unity。在 Unity 内部，`PiSystemBridge.cs` 负责通信桥接，`WaterSystemManager.cs` 负责筛选逻辑和图表更新。
 
-本文件定位为技术交接参考，而非学术论文。其主要目标是帮助导师、实验室成员以及后续开发者理解系统如何搭建、配置、运行、测试和维护。
+本文件定位为技术项目文档，而非学术论文。其主要目标是帮助导师、实验室成员以及后续开发者理解系统如何搭建、配置、运行、测试和维护。
 
 ## Quick Reference
 ## 快速理解

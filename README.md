@@ -1,8 +1,8 @@
-# Raspberry Pi to Unity Handover
+# Raspberry Pi to Unity Documentation Package
 
-This folder is a GitHub-ready handover package for the Raspberry Pi to Unity integration.
+This repository is a GitHub-ready documentation package for the Raspberry Pi to Unity integration.
 
-## What To Keep
+## Core Technical Files
 
 - `raspberry-pi-scripts/pi_input_sender.py`: final integrated runtime script
 - `raspberry-pi-scripts/watch_gpio.py`: GPIO mapping debug tool
@@ -11,7 +11,7 @@ This folder is a GitHub-ready handover package for the Raspberry Pi to Unity int
 - `raspberry-pi-scripts/udp_test_send.py`: UDP path debug tool
 - `unity/PiSystemBridge.cs`: Unity UDP receiver and input handler
 
-## Recommended User Flow
+## Main Runtime Flow
 
 1. Update the target IP in `pi_input_sender.py`.
 2. Start `pi_input_sender.py` on the Raspberry Pi.
@@ -34,7 +34,7 @@ This folder is a GitHub-ready handover package for the Raspberry Pi to Unity int
 - Unity listener port: `5005`
 - Confirmed main script: `pi_input_sender.py`
 
-## Key Hardware Notes
+## Documentation Entry Points
 
 - Detailed joystick wiring and explanation: `docs/joystick-wiring.md`
 - Detailed slider wiring notes: `docs/slider-wiring.md`
