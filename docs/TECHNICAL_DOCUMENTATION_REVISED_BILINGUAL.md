@@ -960,20 +960,118 @@ SPI can be considered available when:
 ### 8.3 Unity Setup Procedure / 8.3 Unity 配置流程
 
 **English**  
-On the Unity side:
-1. Open the Unity project.
-2. Open the main scene `Assets/310.unity`.
-3. Confirm the scene contains the object with `PiSystemBridge.cs`.
-4. Confirm the listen port is `5005`.
-5. Press Play and watch the Console for incoming messages.
+The Unity side should be rebuilt and checked in the following order:
+1. Open the project using Unity `6000.0.62f1`.
+2. Allow Unity to resolve packages from `Packages/manifest.json`.
+3. Confirm that the project contains Meta and XR packages required for the current environment, including `com.meta.xr.sdk.all`, `com.unity.xr.openxr`, `com.unity.xr.meta-openxr`, `com.unity.xr.androidxr-openxr`, `com.unity.xr.arfoundation`, `com.unity.xr.hands`, and `com.unity.xr.interaction.toolkit`.
+4. Confirm that the build target is Android, because the current project settings are configured for Android-based XR deployment.
+5. Open the main scene `Assets/310.unity`.
+6. In the Hierarchy, locate the GameObject named `PiSystemBridge`.
+7. Select the `PiSystemBridge` object and check the Inspector fields.
+8. Confirm the following runtime references are assigned:
+   - `listenPort = 5005`
+   - `mapSwitcher`
+   - `waterSystemManager`
+   - `mapRoot`
+   - `sliderXContainer`
+   - `sliderYContainer`
+   - `intersectionMarker`
+   - river references such as `sgLangat`, `sgLui`, `sgBeranang`, `sgRinching`, `sgBtgNilai`, `sgSemenyih`, `sgLabu`, and `sgJijan`
+   - menu references such as `classPanel` and `dataPanel`
+9. Confirm that the scene also contains the objects required by `MapSwitcher` and `WaterSystemManager`.
+10. Press Play and watch the Console for incoming UDP messages.
+
+The current scene configuration confirms that `PiSystemBridge` is a dedicated GameObject in the scene, and that it is configured with `listenPort = 5005`, assigned scene references, slider ranges, and river highlighter references.
 
 **中文**  
-Unity 端流程如下：
-1. 打开 Unity 项目。
-2. 打开主场景 `Assets/310.unity`。
-3. 确认场景中存在挂载 `PiSystemBridge.cs` 的对象。
-4. 确认监听端口为 `5005`。
-5. 点击 Play，并在 Console 中观察是否收到消息。
+Unity 端建议按以下顺序进行环境重建与检查：
+1. 使用 Unity `6000.0.62f1` 打开项目。
+2. 等待 Unity 根据 `Packages/manifest.json` 自动解析依赖包。
+3. 确认项目中包含当前环境所需的 Meta 和 XR 包，包括 `com.meta.xr.sdk.all`、`com.unity.xr.openxr`、`com.unity.xr.meta-openxr`、`com.unity.xr.androidxr-openxr`、`com.unity.xr.arfoundation`、`com.unity.xr.hands` 和 `com.unity.xr.interaction.toolkit`。
+4. 确认构建目标为 Android，因为当前项目设置面向基于 Android 的 XR 部署。
+5. 打开主场景 `Assets/310.unity`。
+6. 在 Hierarchy 中找到名为 `PiSystemBridge` 的 GameObject。
+7. 选中 `PiSystemBridge` 对象，并检查 Inspector 中的字段。
+8. 确认以下运行时引用已经正确赋值：
+   - `listenPort = 5005`
+   - `mapSwitcher`
+   - `waterSystemManager`
+   - `mapRoot`
+   - `sliderXContainer`
+   - `sliderYContainer`
+   - `intersectionMarker`
+   - 河流高亮引用，例如 `sgLangat`、`sgLui`、`sgBeranang`、`sgRinching`、`sgBtgNilai`、`sgSemenyih`、`sgLabu` 和 `sgJijan`
+   - 菜单引用，例如 `classPanel` 和 `dataPanel`
+9. 确认场景中也存在 `MapSwitcher` 和 `WaterSystemManager` 所需的对象。
+10. 点击 Play，并在 Console 中观察是否收到 UDP 消息。
+
+当前场景配置已经确认：`PiSystemBridge` 是场景中的独立 GameObject，并且已经配置了 `listenPort = 5005`、必要的场景引用、滑杆范围以及河流高亮引用。
+
+#### 8.3.1 Key Unity Scripts and Responsibilities / 8.3.1 Unity 关键脚本与职责
+
+**English**  
+The most important Unity-side scripts for reconstruction are:
+- `PiSystemBridge.cs`: receives Raspberry Pi UDP messages and maps them to Unity actions
+- `WaterSystemManager.cs`: controls data filtering, selected river state, and chart refresh
+- `mapswitch.cs`: switches between default, satellite, and terrain map layers
+- `river.cs` and `waterQualityP.cs`: support river and water quality interaction logic in the scene
+
+These scripts should not be treated as isolated files. They depend on correct scene references and Inspector assignments.
+
+**中文**  
+对于环境重建来说，最重要的 Unity 脚本包括：
+- `PiSystemBridge.cs`：接收树莓派 UDP 消息并映射为 Unity 动作
+- `WaterSystemManager.cs`：控制数据筛选、已选河流状态和图表刷新
+- `mapswitch.cs`：切换默认、卫星和地形地图图层
+- `river.cs` 和 `waterQualityP.cs`：支持场景中的河流与水质交互逻辑
+
+这些脚本不能被视为彼此独立的文件，它们依赖于正确的场景引用和 Inspector 挂载关系。
+
+#### 8.3.2 Inspector Fields That Must Be Checked / 8.3.2 必须检查的 Inspector 字段
+
+**English**  
+For `PiSystemBridge`, the following Inspector values are part of the current validated scene configuration:
+- `listenPort: 5005`
+- `minScale: 0.3`
+- `maxScale: 3`
+- `sliderXMin: -2`
+- `sliderXMax: 200`
+- `sliderYMin: -45`
+- `sliderYMax: 200`
+- `riverSelectionCooldown: 0.04`
+- `snapRadius: 0.5`
+
+If these values or object references are missing, Unity may still run, but the physical controller integration will not behave as expected.
+
+**中文**  
+对于 `PiSystemBridge`，以下 Inspector 数值属于当前已验证场景配置的一部分：
+- `listenPort: 5005`
+- `minScale: 0.3`
+- `maxScale: 3`
+- `sliderXMin: -2`
+- `sliderXMax: 200`
+- `sliderYMin: -45`
+- `sliderYMax: 200`
+- `riverSelectionCooldown: 0.04`
+- `snapRadius: 0.5`
+
+如果这些数值或对象引用缺失，Unity 仍然可能运行，但实体控制器集成不会按照预期工作。
+
+#### 8.3.3 Meta Quest and MR Environment Notes / 8.3.3 Meta Quest 与 MR 环境说明
+
+**English**  
+The current Unity project is configured around a Meta Quest Pro mixed reality workflow. From the package configuration, the project depends on Meta XR SDK packages and Unity XR packages for OpenXR, Android XR, AR Foundation, XR Hands, and XR Interaction Toolkit. Therefore, rebuilding the Unity environment for Meta Quest Pro should begin by preserving package compatibility and Android XR support rather than editing application scripts first.
+
+**中文**  
+当前 Unity 项目围绕 Meta Quest Pro 的混合现实工作流进行配置。从包配置可以确认，该项目依赖 Meta XR SDK，以及用于 OpenXR、Android XR、AR Foundation、XR Hands 和 XR Interaction Toolkit 的 Unity XR 包。因此，在为 Meta Quest Pro 重建 Unity 环境时，应优先保证包兼容性和 Android XR 支持，而不是先修改应用脚本。
+
+### 8.4 GitHub Handover Reference / 8.4 GitHub 交接仓库参考
+
+**English**  
+Including a GitHub repository screenshot in the final report is recommended but not mandatory. A repository homepage screenshot can help reviewers quickly understand that the handover materials, Raspberry Pi scripts, and revised documentation are archived in a traceable location. A second screenshot of the `docs/` or `raspberry-pi-scripts/` folder can also be helpful if the report needs stronger evidence of file organization.
+
+**中文**  
+建议在最终报告中加入 GitHub 仓库截图，但并非强制要求。仓库首页截图可以帮助评审快速理解：交接资料、树莓派脚本和修订后的文档都已被归档到一个可追溯的位置。如果报告需要更强的文件组织证据，也可以补充一张 `docs/` 或 `raspberry-pi-scripts/` 目录截图。
 
 ---
 
