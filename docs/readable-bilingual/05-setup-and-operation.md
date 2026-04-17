@@ -1,4 +1,4 @@
-# 04 Setup and Operation / 04 配置与操作
+# 05 Setup and Operation / 05 配置与操作
 
 ## Raspberry Pi Setup / 树莓派配置
 
@@ -27,20 +27,18 @@
 ## Unity Setup / Unity 配置
 
 **English**
-1. Open the project with Unity `6000.0.62f1`.
-2. Confirm package resolution is complete.
-3. Open `Assets/310.unity`.
-4. Select the `PiSystemBridge` GameObject.
-5. Check Inspector references and `listenPort = 5005`.
-6. Press Play.
+1. Open `Assets/310.unity`.
+2. Select the `PiSystemBridge` GameObject.
+3. Check Inspector references.
+4. Confirm `listenPort = 5005`.
+5. Press Play.
 
 **中文**
-1. 使用 Unity `6000.0.62f1` 打开项目。
-2. 确认依赖包已解析完成。
-3. 打开 `Assets/310.unity`。
-4. 选中 `PiSystemBridge` GameObject。
-5. 检查 Inspector 引用和 `listenPort = 5005`。
-6. 点击 Play。
+1. 打开 `Assets/310.unity`。
+2. 选中 `PiSystemBridge` GameObject。
+3. 检查 Inspector 引用。
+4. 确认 `listenPort = 5005`。
+5. 点击 Play。
 
 ## Runtime Flow / 运行流程
 
