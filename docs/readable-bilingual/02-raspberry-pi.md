@@ -1,13 +1,5 @@
 # 02 Raspberry Pi / 02 树莓派部分
 
-## Role / 作用
-
-**English**  
-Raspberry Pi Zero reads physical control input and sends Unity-compatible UDP messages.
-
-**中文**  
-Raspberry Pi Zero 负责读取实体控制输入，并发送 Unity 可识别的 UDP 消息。
-
 ## Access Method / 访问方式
 
 **English**  
@@ -61,6 +53,24 @@ Channel mapping:
 - `CH3`：纵向滑杆
 - `CH5`：摇杆左右
 - `CH6`：摇杆上下
+
+## SPI Setup / SPI 配置
+
+**English**
+1. Run `sudo raspi-config`.
+2. Open `Interface Options -> SPI -> Enable`.
+3. Reboot using `sudo reboot`.
+4. Check `ls /dev/spidev*`.
+5. If needed, run `lsmod | grep spi`.
+6. If SPI is still unavailable, confirm `dtparam=spi=on` in `/boot/config.txt`.
+
+**中文**
+1. 输入 `sudo raspi-config`。
+2. 进入 `Interface Options -> SPI -> Enable`。
+3. 使用 `sudo reboot` 重启。
+4. 输入 `ls /dev/spidev*` 检查。
+5. 如有需要，输入 `lsmod | grep spi`。
+6. 如果 SPI 仍不可用，则确认 `/boot/config.txt` 中存在 `dtparam=spi=on`。
 
 ## Essential Wiring Summary / 核心接线汇总
 

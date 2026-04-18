@@ -11,7 +11,9 @@
 6. Confirm `UNITY_IP` and `UNITY_PORT`.
 7. Enable SPI using `sudo raspi-config`.
 8. Reboot if needed.
-9. Run `python3 pi_input_sender.py`.
+9. Check `ls /dev/spidev*`.
+10. If needed, check `lsmod | grep spi`.
+11. Run `python3 pi_input_sender.py`.
 
 **中文**
 1. 打开 Windows PowerShell。
@@ -22,7 +24,9 @@
 6. 确认 `UNITY_IP` 和 `UNITY_PORT`。
 7. 使用 `sudo raspi-config` 启用 SPI。
 8. 如有需要，重启树莓派。
-9. 输入 `python3 pi_input_sender.py` 运行脚本。
+9. 输入 `ls /dev/spidev*` 检查。
+10. 如有需要，输入 `lsmod | grep spi`。
+11. 输入 `python3 pi_input_sender.py` 运行脚本。
 
 ## Unity Setup / Unity 配置
 
