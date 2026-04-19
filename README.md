@@ -47,3 +47,4 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 
 - The `unity/` folder mirrors the key scripts so reviewers do not need to browse the entire Unity project tree.
 - This repository is intended to be easier to review than a raw Unity project folder alone.
+- Extended draft report sources were archived outside the public repository to keep this package concise.
