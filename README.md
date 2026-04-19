@@ -2,7 +2,7 @@
 
 This repository is the public handover package for the mixed reality river water quality visualization project.
 
-It now includes the complete Unity project files, the Raspberry Pi runtime scripts, a small set of public-facing handover notes, and the final polished Word submission.
+It now includes the complete Unity project files, the Raspberry Pi runtime scripts, a small set of public-facing handover notes, and the final Word submission.
 
 ## Public Repository Contents
 
@@ -12,7 +12,7 @@ It now includes the complete Unity project files, the Raspberry Pi runtime scrip
 - `raspberry-pi-scripts/`: Raspberry Pi runtime and debug scripts used for controller input and UDP delivery
 - `unity/`: reviewer-friendly copies of the most important Unity scripts
 - `docs/`: concise public handover notes and wiring references
-- `FINAL_DELIVERY_DOCUMENT_POLISHED.docx`: final polished submission document
+- `FINAL_Document.docx`: final submission document
 
 ## Main Technical Entry Points
 
