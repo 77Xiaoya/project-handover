@@ -21,12 +21,11 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 2. Start `pi_input_sender.py` on Raspberry Pi.
 3. Open the Unity scene and confirm `PiSystemBridge` is listening on UDP port `5005`.
 4. Use joystick, sliders, and encoders to drive map style, river selection, menu focus, and data filtering.
-5. Validate behavior using the screenshots and notes stored under `docs/`.
+5. Validate behavior using the public notes in `docs/` and the final submission document.
 
 ## Repository Layout
 
-- `docs/`: handover notes, readable documentation, and report figures
-- `docs/figures/`: high-resolution screenshots and hardware photos used in the report
+- `docs/`: handover notes and public-facing documentation
 - `raspberry-pi-scripts/`: Raspberry Pi-side runtime and debug scripts
 - `unity/`: reviewer-friendly copies of the main Unity scripts
 
@@ -34,8 +33,7 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 
 - `docs/README.md`
 - `docs/script-purposes.md`
-- `docs/readable-bilingual/README.md`
-- `docs/figures/README.md`
+- `docs/raspberry-pi-section-bilingual.md`
 
 ## Current Confirmed Setup
 
@@ -48,5 +46,4 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 ## Notes
 
 - The `unity/` folder mirrors the key scripts so reviewers do not need to browse the entire Unity project tree.
-- High-resolution screenshots are kept in Git for reference and reuse.
 - This repository is intended to be easier to review than a raw Unity project folder alone.

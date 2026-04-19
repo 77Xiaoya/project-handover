@@ -1,6 +1,6 @@
 # Documentation Index
 
-This folder contains the written handover material and the figure assets used in the final report.
+This folder contains the public-facing handover material for the project.
 
 ## Main Documents
 
@@ -9,16 +9,12 @@ This folder contains the written handover material and the figure assets used in
 - `raspberry-pi-section-bilingual.md`: Raspberry Pi-focused bilingual write-up
 - `script-purposes.md`: script and message reference
 
-## Readable Split Version
-
-- `readable-bilingual/README.md`
-
 ## Wiring Notes
 
 - `joystick-wiring.md`
 - `slider-wiring.md`
 - `encoder-wiring.md`
 
-## Figures
+## Notes
 
-- `figures/README.md`
+- Private figure assets and readability-focused draft material were archived outside the public repository.
