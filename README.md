@@ -1,30 +1,41 @@
-# Raspberry Pi to Unity Documentation Package
+# Mixed Reality River Water Quality Handover Package
 
-This repository is a GitHub-ready documentation package for the Raspberry Pi to Unity integration.
+This repository is a GitHub-ready handover package for the mixed reality river water quality visualization project.
 
 ## Core Technical Files
 
-- `raspberry-pi-scripts/pi_input_sender.py`: final integrated runtime script
+- `raspberry-pi-scripts/pi_input_sender.py`: final integrated Raspberry Pi runtime script
 - `raspberry-pi-scripts/watch_gpio.py`: GPIO mapping debug tool
 - `raspberry-pi-scripts/mcp_read_all.py`: ADC channel mapping debug tool
 - `raspberry-pi-scripts/joy_click_test.py`: joystick and click debug tool
 - `raspberry-pi-scripts/udp_test_send.py`: UDP path debug tool
-- `unity/PiSystemBridge.cs`: Unity UDP receiver and input handler
+- `unity/PiSystemBridge.cs`: Unity UDP receiver and input bridge
+- `unity/WaterSystemManager.cs`: Unity-side data and chart controller
+- `unity/mapswitch.cs`: Unity map layer switching logic
+- `FINAL_DELIVERY_DOCUMENT_POLISHED.docx`: final polished submission document
+- `generate_final_delivery_doc.ps1`: Word generation script for the final report
 
 ## Main Runtime Flow
 
-1. Update the target IP in `pi_input_sender.py`.
-2. Start `pi_input_sender.py` on the Raspberry Pi.
-3. Open the Unity project and scene containing `PiSystemBridge`.
-4. Confirm Unity is listening on UDP port `5005`.
-5. Test encoder, joystick, slider, and joystick click input.
+1. Update the target Unity IP in `raspberry-pi-scripts/pi_input_sender.py` if needed.
+2. Start `pi_input_sender.py` on Raspberry Pi.
+3. Open the Unity scene and confirm `PiSystemBridge` is listening on UDP port `5005`.
+4. Use joystick, sliders, and encoders to drive map style, river selection, menu focus, and data filtering.
+5. Validate behavior using the screenshots and notes stored under `docs/`.
 
-## Debug Flow
+## Repository Layout
 
-1. If buttons or encoders do not react, run `watch_gpio.py`.
-2. If slider or joystick axes are unclear, run `mcp_read_all.py`.
-3. If joystick click is unclear, run `joy_click_test.py`.
-4. If Unity receives nothing, run `udp_test_send.py` to test network delivery.
+- `docs/`: handover notes, readable documentation, and report figures
+- `docs/figures/`: high-resolution screenshots and hardware photos used in the report
+- `raspberry-pi-scripts/`: Raspberry Pi-side runtime and debug scripts
+- `unity/`: reviewer-friendly copies of the main Unity scripts
+
+## Documentation Entry Points
+
+- `docs/README.md`
+- `docs/script-purposes.md`
+- `docs/readable-bilingual/README.md`
+- `docs/figures/README.md`
 
 ## Current Confirmed Setup
 
@@ -34,13 +45,8 @@ This repository is a GitHub-ready documentation package for the Raspberry Pi to 
 - Unity listener port: `5005`
 - Confirmed main script: `pi_input_sender.py`
 
-## Documentation Entry Points
+## Notes
 
-- Detailed joystick wiring and explanation: `docs/joystick-wiring.md`
-- Detailed slider wiring notes: `docs/slider-wiring.md`
-- Detailed encoder wiring notes: `docs/encoder-wiring.md`
-- Raspberry Pi bilingual document draft: `docs/raspberry-pi-section-bilingual.md`
-- Full revised bilingual technical document: `docs/TECHNICAL_DOCUMENTATION_REVISED_BILINGUAL.md`
-- Split readable bilingual version: `docs/readable-bilingual/README.md`
-
-See `docs/script-purposes.md` for detailed explanations.
+- The `unity/` folder mirrors the key scripts so reviewers do not need to browse the entire Unity project tree.
+- High-resolution screenshots are kept in Git for reference and reuse.
+- This repository is intended to be easier to review than a raw Unity project folder alone.

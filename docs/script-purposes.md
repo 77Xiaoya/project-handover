@@ -1,25 +1,29 @@
 # Script Purposes
 
-## Final Runtime Script
+## Raspberry Pi Runtime Script
 
 | Script | Purpose | When To Use | Notes |
 | --- | --- | --- | --- |
 | `pi_input_sender.py` | Final integrated Raspberry Pi sender | Normal project operation | Sends encoder, joystick, slider, and button input to Unity over UDP |
 
-## Debug Scripts
+## Raspberry Pi Debug Scripts
 
 | Script | Purpose | When To Use | Expected Output |
 | --- | --- | --- | --- |
-| `watch_gpio.py` | Shows changing GPIO pins | Identify which button or encoder pin is active | Prints `BCMxx: old -> new` |
-| `mcp_read_all.py` | Shows all MCP3008 ADC channels | Identify slider and joystick channel mapping | Prints `CH0` to `CH7` values |
-| `joy_click_test.py` | Tests joystick axes and click button | Verify joystick movement and click counter | Sends JSON with `ch5`, `ch6`, and `click24Count` |
+| `watch_gpio.py` | Shows changing GPIO pins | Identify active button or encoder pins | Prints GPIO pin state changes |
+| `mcp_read_all.py` | Shows MCP3008 ADC channels | Identify slider and joystick channel mapping | Prints channel values |
+| `joy_click_test.py` | Tests joystick axes and click button | Verify joystick movement and click counter | Prints joystick and click test values |
 | `udp_test_send.py` | Tests UDP delivery only | Check if Unity can receive network packets | Sends simple test messages to port `5005` |
 
-## Unity Script
+## Unity Runtime Scripts
 
 | Script | Purpose | Notes |
 | --- | --- | --- |
 | `PiSystemBridge.cs` | Receives UDP messages in Unity and maps them to menu, slider, zoom, and river selection behavior | Current receiver listens on port `5005` |
+| `WaterSystemManager.cs` | Manages river state, filtering UI, parameter selection, and chart updates | Main data-side controller after Unity receives input |
+| `mapswitch.cs` | Switches between default, satellite, and terrain map layers | Used by map style controls |
+| `IntersectionRiverDetector.cs` | Supports river intersection and hover or selection helper logic | Scene interaction support |
+| `waterQualityP.cs` | Supports water-quality presentation behavior | Scene-specific helper logic |
 
 ## Main Raspberry Pi Message Types
 
@@ -33,6 +37,9 @@
 - `JOY:UP`
 - `JOY:DOWN`
 - `JOYBTN`
+- `BTN1`
+- `BTN2`
+- `BTN3`
 - `SLIDER1:<value>`
 - `SLIDER2:<value>`
 
@@ -54,15 +61,8 @@
 
 ## Important Configuration To Check Before Demo
 
-- Update the target Unity PC IP in Raspberry Pi scripts.
+- Update the target Unity PC IP in Raspberry Pi scripts if the lab computer changes.
 - Confirm Unity is listening on port `5005`.
 - Confirm the scene contains `PiSystemBridge`.
 - Confirm the Raspberry Pi and Unity PC are on the same network.
-
-## Detailed Wiring Notes
-
-- `joystick-wiring.md`: detailed joystick pin, breadboard, ADC, and GPIO notes
-- `slider-wiring.md`: detailed horizontal and vertical slider wiring notes
-- `encoder-wiring.md`: detailed encoder pin, power, and GPIO notes
-- `raspberry-pi-section-bilingual.md`: bilingual Raspberry Pi documentation draft for report writing
-- `TECHNICAL_DOCUMENTATION_REVISED_BILINGUAL.md`: full revised bilingual technical document aligned to meeting comments
+- Confirm Inspector references are assigned for `PiSystemBridge`, `WaterSystemManager`, and map layers.
