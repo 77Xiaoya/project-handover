@@ -1,42 +1,59 @@
 # Mixed Reality River Water Quality Handover Package
 
-This repository is a GitHub-ready handover package for the mixed reality river water quality visualization project.
+This repository is the public handover package for the mixed reality river water quality visualization project.
 
-## Core Technical Files
+It now includes the complete Unity project files, the Raspberry Pi runtime scripts, a small set of public-facing handover notes, and the final polished Word submission.
+
+## Public Repository Contents
+
+- `Assets/`: complete Unity project assets, scenes, scripts, prefabs, materials, and package content used by the project
+- `Packages/`: Unity package manifest and package configuration
+- `ProjectSettings/`: Unity project settings required to reopen the project correctly
+- `raspberry-pi-scripts/`: Raspberry Pi runtime and debug scripts used for controller input and UDP delivery
+- `unity/`: reviewer-friendly copies of the most important Unity scripts
+- `docs/`: concise public handover notes and wiring references
+- `FINAL_DELIVERY_DOCUMENT_POLISHED.docx`: final polished submission document
+
+## Main Technical Entry Points
+
+### Raspberry Pi Side
 
 - `raspberry-pi-scripts/pi_input_sender.py`: final integrated Raspberry Pi runtime script
 - `raspberry-pi-scripts/watch_gpio.py`: GPIO mapping debug tool
 - `raspberry-pi-scripts/mcp_read_all.py`: ADC channel mapping debug tool
 - `raspberry-pi-scripts/joy_click_test.py`: joystick and click debug tool
 - `raspberry-pi-scripts/udp_test_send.py`: UDP path debug tool
-- `Assets/`: full Unity project assets and scene content
-- `Packages/`: Unity package manifest and dependencies
-- `ProjectSettings/`: Unity project settings used by the build
-- `unity/PiSystemBridge.cs`: Unity UDP receiver and input bridge
-- `unity/WaterSystemManager.cs`: Unity-side data and chart controller
+
+### Unity Side
+
+- `unity/PiSystemBridge.cs`: Unity UDP receiver and Raspberry Pi input bridge
+- `unity/WaterSystemManager.cs`: Unity-side data, filtering, and chart controller
 - `unity/mapswitch.cs`: Unity map layer switching logic
-- `FINAL_DELIVERY_DOCUMENT_POLISHED.docx`: final polished submission document
+- `Assets/310.unity`: main Unity scene used by the project
 
 ## Main Runtime Flow
 
 1. Update the target Unity IP in `raspberry-pi-scripts/pi_input_sender.py` if needed.
 2. Start `pi_input_sender.py` on Raspberry Pi.
-3. Open the Unity scene and confirm `PiSystemBridge` is listening on UDP port `5005`.
-4. Use joystick, sliders, and encoders to drive map style, river selection, menu focus, and data filtering.
-5. Validate behavior using the public notes in `docs/` and the final submission document.
+3. Open the Unity project and load the main scene.
+4. Confirm `PiSystemBridge` is listening on UDP port `5005`.
+5. Use joystick, sliders, encoders, and buttons to drive map style, river selection, menu focus, filtering, and chart interaction.
 
-## Repository Layout
+## Public Documentation
 
-- `docs/`: handover notes and public-facing documentation
-- `Assets/`, `Packages/`, `ProjectSettings/`: complete Unity project files for rebuild and review
-- `raspberry-pi-scripts/`: Raspberry Pi-side runtime and debug scripts
-- `unity/`: reviewer-friendly copies of the main Unity scripts
+- `docs/README.md`: public documentation index
+- `docs/script-purposes.md`: Raspberry Pi and Unity script reference
+- `docs/raspberry-pi-section-bilingual.md`: Raspberry Pi bilingual handover note
+- `docs/joystick-wiring.md`: joystick wiring reference
+- `docs/slider-wiring.md`: slider wiring reference
+- `docs/encoder-wiring.md`: encoder wiring reference
 
-## Documentation Entry Points
+## Notes On Scope
 
-- `docs/README.md`
-- `docs/script-purposes.md`
-- `docs/raspberry-pi-section-bilingual.md`
+- The full Unity project is now public in this repository under `Assets/`, `Packages/`, and `ProjectSettings/`.
+- The `unity/` folder is kept as a lighter script mirror so reviewers can inspect the main scripts quickly.
+- Internal draft materials, large screenshot sets, and readability-focused split report drafts were archived outside the public repository.
+- The Word generation script was intentionally removed from the public repository because the final `.docx` is the public deliverable.
 
 ## Current Confirmed Setup
 
@@ -44,11 +61,4 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 - Raspberry Pi user: `xlab`
 - Raspberry Pi IP seen during collection: `192.168.50.38`
 - Unity listener port: `5005`
-- Confirmed main script: `pi_input_sender.py`
-
-## Notes
-
-- The `unity/` folder mirrors the key scripts so reviewers do not need to browse the entire Unity project tree.
-- The full Unity project is included under `Assets/`, `Packages/`, and `ProjectSettings/`.
-- This repository is intended to be easier to review than a raw Unity project folder alone.
-- Extended draft report sources were archived outside the public repository to keep this package concise.
+- Confirmed main Raspberry Pi script: `pi_input_sender.py`
