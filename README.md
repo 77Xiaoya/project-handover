@@ -9,11 +9,13 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 - `raspberry-pi-scripts/mcp_read_all.py`: ADC channel mapping debug tool
 - `raspberry-pi-scripts/joy_click_test.py`: joystick and click debug tool
 - `raspberry-pi-scripts/udp_test_send.py`: UDP path debug tool
+- `Assets/`: full Unity project assets and scene content
+- `Packages/`: Unity package manifest and dependencies
+- `ProjectSettings/`: Unity project settings used by the build
 - `unity/PiSystemBridge.cs`: Unity UDP receiver and input bridge
 - `unity/WaterSystemManager.cs`: Unity-side data and chart controller
 - `unity/mapswitch.cs`: Unity map layer switching logic
 - `FINAL_DELIVERY_DOCUMENT_POLISHED.docx`: final polished submission document
-- `generate_final_delivery_doc.ps1`: Word generation script for the final report
 
 ## Main Runtime Flow
 
@@ -26,6 +28,7 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 ## Repository Layout
 
 - `docs/`: handover notes and public-facing documentation
+- `Assets/`, `Packages/`, `ProjectSettings/`: complete Unity project files for rebuild and review
 - `raspberry-pi-scripts/`: Raspberry Pi-side runtime and debug scripts
 - `unity/`: reviewer-friendly copies of the main Unity scripts
 
@@ -46,5 +49,6 @@ This repository is a GitHub-ready handover package for the mixed reality river w
 ## Notes
 
 - The `unity/` folder mirrors the key scripts so reviewers do not need to browse the entire Unity project tree.
+- The full Unity project is included under `Assets/`, `Packages/`, and `ProjectSettings/`.
 - This repository is intended to be easier to review than a raw Unity project folder alone.
 - Extended draft report sources were archived outside the public repository to keep this package concise.
