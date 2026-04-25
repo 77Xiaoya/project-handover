@@ -10,3 +10,11 @@ This folder mirrors the most important Unity-side scripts in a GitHub-friendly l
 - `maplayermanager.cs`: map layer support logic
 
 These files are copied from the Unity project so reviewers can inspect them directly on GitHub.
+
+## Recommended Reading Order
+
+1. `PiSystemBridge.cs`
+2. `WaterSystemManager.cs`
+3. `mapswitch.cs`
+
+The remaining files are supporting scripts used by the Unity scene.

@@ -1,10 +1,14 @@
 # Script Purposes
 
+This page is intended to answer the question: which script is responsible for which part of the system?
+
 ## Raspberry Pi Runtime Script
 
 | Script | Purpose | When To Use | Notes |
 | --- | --- | --- | --- |
 | `pi_input_sender.py` | Final integrated Raspberry Pi sender | Normal project operation | Sends encoder, joystick, slider, and button input to Unity over UDP |
+
+In practice, this is the single most important Raspberry Pi file in the repository.
 
 ## Raspberry Pi Debug Scripts
 
@@ -25,6 +29,12 @@
 | `IntersectionRiverDetector.cs` | Supports river intersection and hover or selection helper logic | Scene interaction support |
 | `waterQualityP.cs` | Supports water-quality presentation behavior | Scene-specific helper logic |
 
+For most reviews, the most important Unity files are:
+
+1. `PiSystemBridge.cs`
+2. `WaterSystemManager.cs`
+3. `mapswitch.cs`
+
 ## Main Raspberry Pi Message Types
 
 `pi_input_sender.py` sends these message formats:
@@ -42,6 +52,8 @@
 - `BTN3`
 - `SLIDER1:<value>`
 - `SLIDER2:<value>`
+
+These messages are consumed by `PiSystemBridge.cs` on the Unity side.
 
 ## Current Hardware Mapping From Main Script
 
@@ -66,3 +78,13 @@
 - Confirm the scene contains `PiSystemBridge`.
 - Confirm the Raspberry Pi and Unity PC are on the same network.
 - Confirm Inspector references are assigned for `PiSystemBridge`, `WaterSystemManager`, and map layers.
+
+## Recommended Review Path
+
+If someone is checking the project for the first time, a good order is:
+
+1. Read `pi_input_sender.py`
+2. Read `PiSystemBridge.cs`
+3. Read `WaterSystemManager.cs`
+4. Read `mapswitch.cs`
+5. Review the relevant wiring note in `docs/`
