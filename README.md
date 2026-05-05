@@ -23,7 +23,7 @@ The hardware side sends encoder, button, joystick, and slider input to Unity. Un
 
 If you only need the most important files, start with these:
 
-1. `FINAL_Document.docx`: final submission document
+1. [Download `final.docx`](https://github.com/77Xiaoya/project-handover/raw/main/final.docx): final submission document
 2. `raspberry-pi-scripts/pi_input_sender.py`: main Raspberry Pi runtime script
 3. `unity/PiSystemBridge.cs`: Unity-side UDP receiver and control bridge
 4. `unity/WaterSystemManager.cs`: Unity-side data and chart logic
