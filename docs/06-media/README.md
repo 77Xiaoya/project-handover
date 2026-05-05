@@ -4,7 +4,7 @@
 
 - `lab-photos/`: phone photos of devices, cables, room layout
 - `screenshots/`: desktop screenshots of scripts, Inspector, Console, terminal
-- Video download: [set up video.mp4](https://github.com/77Xiaoya/project-handover/releases/download/media-assets/set%20up%20video.mp4)
+- Video download: [set up video.mp4](https://github.com/77Xiaoya/project-handover/releases/download/media-assets/set.up.video.mp4)
 
 ## Capture Order
 
