@@ -11,8 +11,8 @@ The goal is one-to-one correspondence between:
 
 This file assumes that:
 
-- hardware photos live in `docs/06-media/lab-photos/`
-- screenshots live in `docs/06-media/screenshots/`
+- hardware photos live in `docs/project-figures-and-screenshots/lab-photos/`
+- screenshots live in `docs/project-figures-and-screenshots/screenshots/`
 
 ## Placement Rules
 
@@ -26,7 +26,7 @@ This file assumes that:
 
 ### Figure 1. Overall system architecture
 
-- File: `docs/06-media/lab-photos/overall.png`
+- File: `docs/project-figures-and-screenshots/lab-photos/overall.png`
 - Word location: below `Figure 1. Overall system architecture`
 - Purpose: show the full physical delivery path from controller hardware to Raspberry Pi and Unity
 - Caption text:
@@ -51,12 +51,12 @@ This file assumes that:
 This figure should be built as a 2 x 3 screenshot group if space allows.
 
 - Place these files under one grouped figure:
-  - `docs/06-media/lab-photos/physical controllers overview.jpg`
-  - `docs/06-media/screenshots/channel reading on Raspberry Pi.png`
-  - `docs/06-media/screenshots/terminal output.png`
-  - `docs/06-media/screenshots/UDP message .png`
-  - `docs/06-media/screenshots/PiSystemBridge listening on port 5005 in Unity.png`
-  - `docs/06-media/screenshots/final Unity response in map, river, RI, and data view1.png`
+  - `docs/project-figures-and-screenshots/lab-photos/physical controllers overview.jpg`
+  - `docs/project-figures-and-screenshots/screenshots/channel reading on Raspberry Pi.png`
+  - `docs/project-figures-and-screenshots/screenshots/terminal output.png`
+  - `docs/project-figures-and-screenshots/screenshots/UDP message .png`
+  - `docs/project-figures-and-screenshots/screenshots/PiSystemBridge listening on port 5005 in Unity.png`
+  - `docs/project-figures-and-screenshots/screenshots/final Unity response in map, river, RI, and data view1.png`
 - Word location: below `Figure 2. Data flow from Raspberry Pi to Unity`
 - Recommended sub-labels:
   - `(a) Physical controllers overview`
@@ -75,11 +75,11 @@ This figure should be built as a 2 x 3 screenshot group if space allows.
 ### Figure 3. Key sections of pi_input_sender.py
 
 - Use these existing screenshots:
-  - `docs/06-media/screenshots/figure-03-network-and-send.png`
-  - `docs/06-media/screenshots/figure-03-button-callbacks.png`
-  - `docs/06-media/screenshots/figure-03-encoder-loop.png`
-  - `docs/06-media/screenshots/figure-03-adc-and-thresholds.png`
-  - `docs/06-media/screenshots/figure-03-joystick-and-slider-loop.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-03-network-and-send.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-03-button-callbacks.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-03-encoder-loop.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-03-adc-and-thresholds.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-03-joystick-and-slider-loop.png`
 - Word location: below `Figure 3. Key sections of pi_input_sender.py`
 - Recommended sub-labels:
   - `(a) Network configuration and send()`
@@ -95,9 +95,9 @@ This figure should be built as a 2 x 3 screenshot group if space allows.
 Use a three-part figure here.
 
 - Files:
-  - `docs/06-media/screenshots/SPI wiring reference between Raspberry Pi and MCP3008.png`
-  - `docs/06-media/lab-photos/sliders.png`
-  - `docs/06-media/screenshots/mcp_read_all.py can read changing values.png`
+  - `docs/project-figures-and-screenshots/screenshots/SPI wiring reference between Raspberry Pi and MCP3008.png`
+  - `docs/project-figures-and-screenshots/lab-photos/sliders.png`
+  - `docs/project-figures-and-screenshots/screenshots/mcp_read_all.py can read changing values.png`
 - Word location: below `Figure 4. MCP3008 analog conversion flow`
 - Recommended sub-labels:
   - `(a) SPI wiring reference between Raspberry Pi and MCP3008`
@@ -126,7 +126,7 @@ Use a three-part figure here.
 
 ### Figure 5. Raspberry Pi and breadboard overview
 
-- File: `docs/06-media/lab-photos/overall.png`
+- File: `docs/project-figures-and-screenshots/lab-photos/overall.png`
 - Word location: below `Figure 5. Raspberry Pi and breadboard overview`
 - Purpose: show the physical prototype layout clearly before module-by-module mapping
 - Caption text:
@@ -146,11 +146,11 @@ Use a three-part figure here.
 This should be a multi-image hardware mapping figure.
 
 - Files:
-  - `docs/06-media/lab-photos/joystick.png`
-  - `docs/06-media/lab-photos/sliders.png`
-  - `docs/06-media/lab-photos/Rotary Knob1.png`
-  - `docs/06-media/lab-photos/Rotary Knob2.png`
-  - `docs/06-media/lab-photos/Rotary Knob3.png`
+  - `docs/project-figures-and-screenshots/lab-photos/joystick.png`
+  - `docs/project-figures-and-screenshots/lab-photos/sliders.png`
+  - `docs/project-figures-and-screenshots/lab-photos/Rotary Knob1.png`
+  - `docs/project-figures-and-screenshots/lab-photos/Rotary Knob2.png`
+  - `docs/project-figures-and-screenshots/lab-photos/Rotary Knob3.png`
 - Word location: below `Figure 6. Joystick, slider, and encoder mapping`
 - Recommended sub-labels:
   - `(a) Joystick mapping`
@@ -191,8 +191,8 @@ This should be a multi-image hardware mapping figure.
 ### Figure 7. Unity project and XR package setup
 
 - Files:
-  - `docs/06-media/screenshots/figure-07-package-manager.png`
-  - `docs/06-media/screenshots/figure-07-xr-plugin-management.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-07-package-manager.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-07-xr-plugin-management.png`
 - Word location: below `Figure 7. Unity project and XR package setup`
 - Caption text:
   `Figure 7. Unity project and XR package setup`
@@ -200,9 +200,9 @@ This should be a multi-image hardware mapping figure.
 ### Figure 8. Key Unity scripts and scene relationship
 
 - Files:
-  - `docs/06-media/screenshots/figure-08-water-system-manager-upper.png`
-  - `docs/06-media/screenshots/figure-08-water-system-manager-lower.png`
-  - `docs/06-media/screenshots/figure-08-map-switcher.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-08-water-system-manager-upper.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-08-water-system-manager-lower.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-08-map-switcher.png`
 - Word location: below `Figure 8. Key Unity scripts and scene relationship`
 - Caption text:
   `Figure 8. Key Unity scripts and scene relationship`
@@ -210,8 +210,8 @@ This should be a multi-image hardware mapping figure.
 ### Figure 9. PiSystemBridge Inspector screenshot
 
 - Files:
-  - `docs/06-media/screenshots/figure-09-pisystembridge-upper.png`
-  - `docs/06-media/screenshots/figure-09-pisystembridge-lower.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-09-pisystembridge-upper.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-09-pisystembridge-lower.png`
 - Word location: below `Figure 9. PiSystemBridge Inspector screenshot`
 - Caption text:
   `Figure 9. PiSystemBridge Inspector screenshot`
@@ -226,10 +226,10 @@ This should be a multi-image hardware mapping figure.
 ### Figure 10. Raspberry Pi setup and SSH access
 
 - Files:
-  - `docs/06-media/screenshots/Windows PowerShell window.png`
-  - `docs/06-media/screenshots/arp-a pi ip checking.png`
-  - `docs/06-media/screenshots/SSH login success screen.png`
-  - `docs/06-media/screenshots/python3 --version output.png`
+  - `docs/project-figures-and-screenshots/screenshots/Windows PowerShell window.png`
+  - `docs/project-figures-and-screenshots/screenshots/arp-a pi ip checking.png`
+  - `docs/project-figures-and-screenshots/screenshots/SSH login success screen.png`
+  - `docs/project-figures-and-screenshots/screenshots/python3 --version output.png`
 - Word location: below `Figure 10. Raspberry Pi setup and SSH access`
 - Recommended sub-labels:
   - `(a) Windows PowerShell`
@@ -243,29 +243,29 @@ This should be a multi-image hardware mapping figure.
 
 These can stay inline instead of receiving new figure numbers if the page gets crowded.
 
-- `docs/06-media/screenshots/pi_input_sender.py line showing UNITY_IP and UNITY_PORT(pc).png`
+- `docs/project-figures-and-screenshots/screenshots/pi_input_sender.py line showing UNITY_IP and UNITY_PORT(pc).png`
   - Place after the paragraph that explains `UNITY_IP` and `UNITY_PORT`
-- `docs/06-media/screenshots/installation command output.png`
+- `docs/project-figures-and-screenshots/screenshots/installation command output.png`
   - Place after package installation step
-- `docs/06-media/screenshots/Imports OK output.png`
+- `docs/project-figures-and-screenshots/screenshots/Imports OK output.png`
   - Place after the import verification step
-- `docs/06-media/screenshots/Open Interface Options .png`
+- `docs/project-figures-and-screenshots/screenshots/Open Interface Options .png`
   - Place in SPI setup steps
-- `docs/06-media/screenshots/- SPI - Enable.png`
+- `docs/project-figures-and-screenshots/screenshots/- SPI - Enable.png`
   - Place in SPI setup steps
-- `docs/06-media/screenshots/- Enable.png`
+- `docs/project-figures-and-screenshots/screenshots/- Enable.png`
   - Place in SPI setup steps
-- `docs/06-media/screenshots/Reboot using sudo reboot.png`
+- `docs/project-figures-and-screenshots/screenshots/Reboot using sudo reboot.png`
   - Place after reboot instruction
-- `docs/06-media/screenshots/- ls devspidev result- lsmod  grep spi result.png`
+- `docs/project-figures-and-screenshots/screenshots/- ls devspidev result- lsmod  grep spi result.png`
   - Place in SPI verification steps
 
 ### Figure 11. Raspberry Pi terminal output for encoders, sliders, and joystick
 
 - Files:
-  - `docs/06-media/screenshots/terminal output.png`
-  - `docs/06-media/screenshots/UDP message .png`
-  - `docs/06-media/screenshots/channel reading on Raspberry Pi.png`
+  - `docs/project-figures-and-screenshots/screenshots/terminal output.png`
+  - `docs/project-figures-and-screenshots/screenshots/UDP message .png`
+  - `docs/project-figures-and-screenshots/screenshots/channel reading on Raspberry Pi.png`
 - Word location: below `Figure 11. Raspberry Pi terminal output for encoders, sliders, and joystick`
 - Recommended sub-labels:
   - `(a) Main runtime output`
@@ -277,9 +277,9 @@ These can stay inline instead of receiving new figure numbers if the page gets c
 ### Figure 12. MR runtime interface and data interaction
 
 - Files:
-  - `docs/06-media/screenshots/final Unity response in map, river, RI, and data view1.png`
-  - `docs/06-media/screenshots/final Unity response in map, river, RI, and data view2.png`
-  - `docs/06-media/screenshots/figure-12-mr-runtime.png`
+  - `docs/project-figures-and-screenshots/screenshots/final Unity response in map, river, RI, and data view1.png`
+  - `docs/project-figures-and-screenshots/screenshots/final Unity response in map, river, RI, and data view2.png`
+  - `docs/project-figures-and-screenshots/screenshots/figure-12-mr-runtime.png`
 - Word location: below `Figure 12. MR runtime interface and data interaction`
 - Caption text:
   `Figure 12. MR runtime interface and data interaction`
